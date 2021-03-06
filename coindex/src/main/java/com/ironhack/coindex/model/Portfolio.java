@@ -14,7 +14,7 @@ public class Portfolio {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "portfolio")
+    @OneToMany(mappedBy = "portfolio", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Position> positions;
     @ManyToOne
     private UserProfile userProfile;

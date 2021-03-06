@@ -19,9 +19,7 @@ public class UserProfileService implements IUserProfileService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         UserProfile userProfile = repository.findById(id).get();
-        UserProfileDTO userProfileDTO = new UserProfileDTO(userProfile);
-
-        return userProfileDTO;
+        return new UserProfileDTO(userProfile);
     }
 
     public UserProfileDTO addUserProfile(UserProfileDTO userProfileDTO) {
