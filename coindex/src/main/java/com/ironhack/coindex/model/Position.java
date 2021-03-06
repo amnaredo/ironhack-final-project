@@ -57,4 +57,8 @@ public class Position {
     public void setUpdates(Collection<PositionUpdate> updates) {
         this.updates = updates;
     }
+
+    public boolean addPositionUpdate(PositionUpdate positionUpdate) {
+        return this.updates.add(positionUpdate);
+    }
 }

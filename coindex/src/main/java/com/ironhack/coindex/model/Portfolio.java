@@ -92,5 +92,8 @@ public class Portfolio {
         this.creationDateTime = creationDateTime;
     }
 
+    public boolean addPosition(Position position) {
+        return this.getPositions().add(position);
+    }
 
 }
