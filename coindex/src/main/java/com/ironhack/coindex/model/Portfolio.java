@@ -1,6 +1,10 @@
 package com.ironhack.coindex.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -14,6 +18,10 @@ public class Portfolio {
     private Collection<Position> positions;
     @ManyToOne
     private UserProfile userProfile;
+    @CreationTimestamp
+    private LocalDateTime creationDateTime;
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 
 
     public Portfolio() {
@@ -65,4 +73,24 @@ public class Portfolio {
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
+
+
+
+    public LocalDateTime getUpdateDateTime() {
+        return updateDateTime;
+    }
+
+    public void setUpdateDateTime(LocalDateTime updateDateTime) {
+        this.updateDateTime = updateDateTime;
+    }
+
+    public LocalDateTime getCreationDateTime() {
+        return creationDateTime;
+    }
+
+    public void setCreationDateTime(LocalDateTime creationDateTime) {
+        this.creationDateTime = creationDateTime;
+    }
+
+
 }

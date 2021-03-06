@@ -1,6 +1,9 @@
 package com.ironhack.coindex.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -16,6 +19,10 @@ public class UserProfile {
     private String photoUrl;
     @OneToMany(mappedBy = "userProfile")
     private Collection<Portfolio> portfolios;
+    @CreationTimestamp
+    private LocalDateTime creationDateTime;
+    private LocalDateTime lastAccessDateTime;
+
 
     public UserProfile() {
     }
