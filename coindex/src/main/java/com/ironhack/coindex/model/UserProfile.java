@@ -15,7 +15,6 @@ public class UserProfile {
     private String lastName;
     private String email;
     @Column(unique = true)
-    private String nickName;
     private String photoUrl;
     @OneToMany(mappedBy = "userProfile")
     private Collection<Portfolio> portfolios;
@@ -27,11 +26,10 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    public UserProfile(String firstName, String lastName, String email, String nickName, String photoUrl, Collection<Portfolio> portfolios) {
+    public UserProfile(String firstName, String lastName, String email, String photoUrl, Collection<Portfolio> portfolios) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.nickName = nickName;
         this.photoUrl = photoUrl;
         this.portfolios = portfolios;
     }
@@ -66,14 +64,6 @@ public class UserProfile {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getPhotoUrl() {
