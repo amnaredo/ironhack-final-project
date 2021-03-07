@@ -14,8 +14,8 @@ public interface UserProfileClient {
     UserProfileDTO addUserProfile(@RequestBody UserProfileDTO userProfileDTO);
 
     @PutMapping("/users/{id}")
-    void updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO);
+    UserProfileDTO updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO);
 
     @DeleteMapping("/users/{id}")
-    void deleteUserProfile(@PathVariable Long id);
+    UserProfileDTO deleteUserProfile(@PathVariable Long id);
 }

@@ -34,14 +34,18 @@ public class UserProfileService implements IUserProfileService {
         return new UserProfileDTO(repository.save(userProfile));
     }
 
-    public void deleteUserProfile(Long id) {
+    public UserProfileDTO deleteUserProfile(Long id) {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
+        UserProfile userProfile = repository.findById(id).get();
         repository.deleteById(id);
+
+        UserProfileDTO userProfileDTO = new UserProfileDTO(userProfile);
+        return userProfileDTO;
     }
 
-    public void updateUserProfile(Long id, UserProfileDTO userProfileDTO) {
+    public UserProfileDTO updateUserProfile(Long id, UserProfileDTO userProfileDTO) {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -55,5 +59,6 @@ public class UserProfileService implements IUserProfileService {
         userProfile.setPhotoUrl(userProfileDTO.getPhotoUrl());
 
         repository.save(userProfile);
+        return new UserProfileDTO(userProfile);
     }
 }

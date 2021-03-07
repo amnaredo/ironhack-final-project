@@ -7,8 +7,8 @@ import java.util.List;
 public interface IPortfolioService {
     PortfolioDTO getPortfolio(Long id);
     PortfolioDTO addPortfolio(Long idUser, PortfolioDTO portfolioDTO);
-    void updatePortfolio(Long id, PortfolioDTO portfolioDTO);
-    void deletePortfolio(Long id);
+    PortfolioDTO updatePortfolio(Long id, PortfolioDTO portfolioDTO);
+    PortfolioDTO deletePortfolio(Long id);
 
     List<PortfolioDTO> getUserPortfolios(Long idUser);
 }

@@ -16,10 +16,10 @@ public interface PortfolioClient {
     PortfolioDTO addPortfolio(@PathVariable Long idUser, @RequestBody PortfolioDTO portfolioDTO);
 
     @PatchMapping("/portfolios/{id}")
-    void updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO);
+    PortfolioDTO updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO);
 
     @DeleteMapping("/portfolios/{id}")
-    void deletePortfolio(@PathVariable Long id);
+    PortfolioDTO deletePortfolio(@PathVariable Long id);
 
     @GetMapping("/users/{idUser}/portfolios")
     List<PortfolioDTO> getUserPortfolios(@PathVariable Long idUser);

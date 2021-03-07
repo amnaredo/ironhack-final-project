@@ -64,7 +64,7 @@ public class PortfolioService implements IPortfolioService {
         return portfolioDTO;
     }
 
-    public void updatePortfolio(Long id, PortfolioDTO portfolioDTO) {
+    public PortfolioDTO updatePortfolio(Long id, PortfolioDTO portfolioDTO) {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -73,9 +73,10 @@ public class PortfolioService implements IPortfolioService {
         portfolio.setDescription(portfolioDTO.getDescription());
 
         repository.save(portfolio);
+        return portfolioDTO;
     }
 
-    public void deletePortfolio(Long id) {
+    public PortfolioDTO deletePortfolio(Long id) {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -90,6 +91,13 @@ public class PortfolioService implements IPortfolioService {
         }
 
         repository.deleteById(id);
+
+        PortfolioDTO portfolioDTO = new PortfolioDTO();
+        portfolioDTO.setId(id);
+        portfolioDTO.setName(portfolio.getName());
+        portfolioDTO.setDescription(portfolio.getDescription());
+        portfolioDTO.setIdUserProfile(portfolio.getIdUserProfile());
+        return portfolioDTO;
     }
 
     public List<PortfolioDTO> getUserPortfolios(Long idUserProfile) {

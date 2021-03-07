@@ -26,13 +26,13 @@ public class UserProfileController implements IUserProfileController {
 
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) {
-        service.updateUserProfile(id, userProfileDTO);
+    public UserProfileDTO updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) {
+        return service.updateUserProfile(id, userProfileDTO);
     }
 
     @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUserProfile(@PathVariable Long id) {
-        service.deleteUserProfile(id);
+    public UserProfileDTO deleteUserProfile(@PathVariable Long id) {
+        return service.deleteUserProfile(id);
     }
 }

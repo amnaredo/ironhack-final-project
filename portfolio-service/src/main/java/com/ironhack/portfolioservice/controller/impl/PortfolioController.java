@@ -28,14 +28,14 @@ public class PortfolioController implements IPortfolioController {
 
     @PatchMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO) {
-        service.updatePortfolio(id, portfolioDTO);
+    public PortfolioDTO updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO) {
+        return service.updatePortfolio(id, portfolioDTO);
     }
 
     @DeleteMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePortfolio(Long id) {
-        service.deletePortfolio(id);
+    public PortfolioDTO deletePortfolio(Long id) {
+        return service.deletePortfolio(id);
     }
 
     @GetMapping("/users/{idUser}/portfolios")
