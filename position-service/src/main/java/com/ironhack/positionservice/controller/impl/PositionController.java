@@ -28,8 +28,8 @@ public class PositionController implements IPositionController {
 
     @DeleteMapping("/positions/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePosition(@PathVariable Long id) {
-        service.deletePosition(id);
+    public PositionDTO deletePosition(@PathVariable Long id) {
+        return service.deletePosition(id);
     }
 
     @GetMapping("/portfolios/{idPortfolio}/positions")

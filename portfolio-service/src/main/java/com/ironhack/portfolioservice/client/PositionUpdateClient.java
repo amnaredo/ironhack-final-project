@@ -3,10 +3,7 @@ package com.ironhack.portfolioservice.client;
 import com.ironhack.portfolioservice.dto.PositionUpdateDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +13,14 @@ public interface PositionUpdateClient {
     @GetMapping("/updates/{id}")
     PositionUpdateDTO getPositionUpdate(@PathVariable Long id);
 
-    @PostMapping("/positions/{id}/updates")
+    @PostMapping("/positions/{idPosition}/updates")
     PositionUpdateDTO addPositionUpdate(@PathVariable Long idPosition, @RequestBody PositionUpdateDTO positionUpdateDTO);
 
-    @GetMapping("/positions/{id}/updates")
+    @DeleteMapping("/updates/{id}")
+    PositionUpdateDTO deletePositionUpdate(@PathVariable Long id);
+
+    @GetMapping("/positions/{idPosition}/updates")
     List<PositionUpdateDTO> getPositionUpdates(@PathVariable Long idPosition);
+
+
 }

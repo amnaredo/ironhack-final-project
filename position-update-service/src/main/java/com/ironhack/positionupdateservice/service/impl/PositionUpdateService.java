@@ -32,6 +32,16 @@ public class PositionUpdateService implements IPositionUpdateService {
         return new PositionUpdateDTO(repository.save(positionUpdate));
     }
 
+    public PositionUpdateDTO deletePositionUpdate(Long id) {
+        if(!repository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        PositionUpdate positionUpdate = repository.findById(id).get();
+
+        repository.delete(positionUpdate);
+        return new PositionUpdateDTO(positionUpdate);
+    }
+
     public List<PositionUpdateDTO> getPositionUpdates(Long idPosition) {
 
         List<PositionUpdate> updates = repository.findByIdPosition(idPosition);

@@ -5,6 +5,7 @@ import com.ironhack.positionupdateservice.model.PositionUpdate;
 import java.math.BigDecimal;
 
 public class PositionUpdateDTO {
+    private Long id;
     private BigDecimal amount;
     private String description;
 
@@ -13,8 +14,17 @@ public class PositionUpdateDTO {
 
     public PositionUpdateDTO(PositionUpdate positionUpdate) {
         this();
+        this.setId(positionUpdate.getId());
         this.setAmount(positionUpdate.getAmount());
         this.setDescription(positionUpdate.getDescription());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getAmount() {

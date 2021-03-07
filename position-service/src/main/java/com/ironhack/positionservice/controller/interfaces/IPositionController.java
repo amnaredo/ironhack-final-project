@@ -8,7 +8,7 @@ public interface IPositionController {
 
     PositionDTO getPosition(Long id);
     PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO);
-    void deletePosition(Long id);
+    PositionDTO deletePosition(Long id);
 
     List<PositionDTO> getPortfolioPositions(Long idPortfolio);
 }

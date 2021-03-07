@@ -16,7 +16,7 @@ public interface PositionClient {
     PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO);
 
     @DeleteMapping("/positions/{id}")
-    void deletePosition(@PathVariable Long id);
+    PositionDTO deletePosition(@PathVariable Long id);
 
     @GetMapping("/portfolios/{idPortfolio}/positions")
     List<PositionDTO> getPortfolioPositions(@PathVariable Long idPortfolio);
