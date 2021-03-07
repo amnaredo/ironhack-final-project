@@ -2,8 +2,7 @@ package com.ironhack.positionservice.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
+
 
 @Entity
 public class Position {
@@ -12,17 +11,14 @@ public class Position {
     private Long id;
     private String coinId;
     private BigDecimal amount;
-    @ElementCollection(targetClass=Long.class)
-    private List<Long> updates;
     private Long idPortfolio;
 
     public Position() {
     }
 
-    public Position(String coinId, BigDecimal amount, List<Long> updates) {
+    public Position(String coinId, BigDecimal amount) {
         this.coinId = coinId;
         this.amount = amount;
-        this.updates = updates;
     }
 
 
@@ -48,18 +44,6 @@ public class Position {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public Collection<Long> getUpdates() {
-        return updates;
-    }
-
-    public void setUpdates(List<Long> updates) {
-        this.updates = updates;
-    }
-
-    public boolean addPositionUpdate(Long positionUpdate) {
-        return this.updates.add(positionUpdate);
     }
 
     public Long getIdPortfolio() {
