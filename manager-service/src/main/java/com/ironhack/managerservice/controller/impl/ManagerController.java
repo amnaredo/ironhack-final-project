@@ -2,6 +2,8 @@ package com.ironhack.managerservice.controller.impl;
 
 import com.ironhack.managerservice.controller.interfaces.IManagerController;
 import com.ironhack.managerservice.dto.PortfolioDTO;
+import com.ironhack.managerservice.dto.PositionDTO;
+import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import com.ironhack.managerservice.dto.UserProfileDTO;
 import com.ironhack.managerservice.service.interfaces.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,35 @@ public class ManagerController implements IManagerController {
     @Autowired
     private IManagerService service;
 
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserProfileDTO> getAllUserProfiles() {
+        return service.getAllUserProfiles();
+    }
+
+    @GetMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserProfileDTO getUserProfile(@PathVariable Long id) {
+        return service.getUserProfile(id);
+    }
+
+    @PostMapping("/users")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserProfileDTO addUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
+        return service.addUserProfile(userProfileDTO);
+    }
+
+    @PatchMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) {
+        service.updateUserProfile(id, userProfileDTO);
+    }
+
+    @DeleteMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUserProfile(@PathVariable Long id) {
+        service.deleteUserProfile(id);
+    }
     @GetMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PortfolioDTO getPortfolio(@PathVariable Long id) {
@@ -46,27 +77,27 @@ public class ManagerController implements IManagerController {
         return service.getUserPortfolios(idUser);
     }
 
-    @GetMapping("/users/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public UserProfileDTO getUserProfile(@PathVariable Long id) {
-        return service.getUserProfile(id);
-    }
-
-    @PostMapping("/users/")
+    @PostMapping("/portfolios/{idPortfolio}/positions")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserProfileDTO addUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
-        return service.addUserProfile(userProfileDTO);
+    public PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO) {
+        return service.addPosition(idPortfolio, positionDTO);
     }
 
-    @PatchMapping("/users/{id}")
+    @DeleteMapping("/positions/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) {
-        service.updateUserProfile(id, userProfileDTO);
+    public void deletePosition(@PathVariable Long id) {
+        service.deletePosition(id);
     }
 
-    @DeleteMapping("/users/{id}")
+    @PostMapping("/positions/{idPosition}/updates")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PositionUpdateDTO addPositionUpdate(@PathVariable Long idPosition, @RequestBody PositionUpdateDTO positionUpdateDTO) {
+        return service.addPositionUpdate(idPosition, positionUpdateDTO);
+    }
+
+    @DeleteMapping("/positions/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUserProfile(@PathVariable Long id) {
-        service.deleteUserProfile(id);
+    public void deletePositionUpdate(@PathVariable Long id) {
+        service.deletePositionUpdate(id);
     }
 }

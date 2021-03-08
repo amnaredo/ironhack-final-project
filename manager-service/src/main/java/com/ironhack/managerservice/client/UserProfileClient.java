@@ -4,8 +4,13 @@ import com.ironhack.managerservice.dto.UserProfileDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @FeignClient("user-profile-service")
 public interface UserProfileClient {
+
+    @GetMapping("/users")
+    List<UserProfileDTO> getAllUserProfiles();
 
     @GetMapping("/users/{id}")
     UserProfileDTO getUserProfile(@PathVariable Long id);

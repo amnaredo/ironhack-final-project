@@ -1,6 +1,8 @@
 package com.ironhack.managerservice.client;
 
 import com.ironhack.managerservice.dto.PortfolioDTO;
+import com.ironhack.managerservice.dto.PositionDTO;
+import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,4 +25,17 @@ public interface PortfolioClient {
 
     @GetMapping("/users/{idUser}/portfolios")
     List<PortfolioDTO> getUserPortfolios(@PathVariable Long idUser);
+
+
+    @PostMapping("/portfolios/{idPortfolio}/positions")
+    PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO);
+
+    @DeleteMapping("/positions/{id}")
+    PositionDTO deletePosition(@RequestBody Long id);
+
+    @PostMapping("/positions/{idPosition}/updates")
+    PositionUpdateDTO addPositionUpdate(@PathVariable Long idPosition, @RequestBody PositionUpdateDTO positionUpdateDTO);
+
+    @DeleteMapping("/updates/{id}")
+    PositionUpdateDTO deletePositionUpdate(@PathVariable Long id);
 }

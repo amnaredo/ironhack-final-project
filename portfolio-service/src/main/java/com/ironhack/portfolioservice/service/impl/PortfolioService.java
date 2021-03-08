@@ -152,7 +152,27 @@ public class PortfolioService implements IPortfolioService {
         return updates;
     }
 
-    private PositionDTO deletePosition(Long idPosition) {
+
+    private List<PositionDTO> getPortfolioPositionsFallback() {
+        return new ArrayList<>();
+    }
+
+    private List<PositionUpdateDTO> getPositionUpdatesFallback() {
+        return new ArrayList<>();
+    }
+
+
+    public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
+        CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
+
+        PositionDTO newPositionDTO = cbPositionService.run(
+                () -> positionClient.addPosition(idPortfolio, positionDTO),
+                throwable -> addPositionFallback());
+
+        return newPositionDTO;
+    }
+
+    public PositionDTO deletePosition(Long idPosition) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
 
         PositionDTO positionDTO = cbPositionService.run(
@@ -163,7 +183,27 @@ public class PortfolioService implements IPortfolioService {
     }
 
 
-    private PositionUpdateDTO deletePositionUpdate(Long idPositionUpdate) {
+    private PositionDTO addPositionFallback() {
+        return new PositionDTO();
+    }
+
+    private PositionDTO deletePositionFallback() {
+        return new PositionDTO();
+    }
+
+
+    public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
+        CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
+
+        PositionUpdateDTO newPositionUpdateDTO = cbPositionUpdateService.run(
+                () -> positionUpdateClient.addPositionUpdate(idPosition, positionUpdateDTO),
+                throwable -> addPositionUpdateFallback());
+
+        return newPositionUpdateDTO;
+    }
+
+
+    public PositionUpdateDTO deletePositionUpdate(Long idPositionUpdate) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
 
         PositionUpdateDTO positionUpdateDTO = cbPositionUpdateService.run(
@@ -173,20 +213,12 @@ public class PortfolioService implements IPortfolioService {
         return positionUpdateDTO;
     }
 
-    private List<PositionDTO> getPortfolioPositionsFallback() {
-        return new ArrayList<>();
-    }
 
-    private List<PositionUpdateDTO> getPositionUpdatesFallback() {
-        return new ArrayList<>();
-    }
-
-    private PositionDTO deletePositionFallback() {
-        return new PositionDTO();
+    private PositionUpdateDTO addPositionUpdateFallback() {
+        return new PositionUpdateDTO();
     }
 
     private PositionUpdateDTO deletePositionUpdateFallback() {
         return new PositionUpdateDTO();
     }
-
 }

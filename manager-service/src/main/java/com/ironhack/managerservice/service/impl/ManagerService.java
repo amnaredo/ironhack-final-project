@@ -3,6 +3,8 @@ package com.ironhack.managerservice.service.impl;
 import com.ironhack.managerservice.client.PortfolioClient;
 import com.ironhack.managerservice.client.UserProfileClient;
 import com.ironhack.managerservice.dto.PortfolioDTO;
+import com.ironhack.managerservice.dto.PositionDTO;
+import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import com.ironhack.managerservice.dto.UserProfileDTO;
 import com.ironhack.managerservice.service.interfaces.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,6 @@ public class ManagerService implements IManagerService {
                 throwable -> getUserPortfoliosFallback());
     }
 
-
     private PortfolioDTO getPortfolioFallback() {
         return new PortfolioDTO();
     }
@@ -83,6 +84,14 @@ public class ManagerService implements IManagerService {
         return new ArrayList<>();
     }
 
+
+    public List<UserProfileDTO> getAllUserProfiles() {
+        CircuitBreaker cbUserProfileService = circuitBreakerFactory.create("user-profile-service");
+
+        return cbUserProfileService.run(
+                () -> userProfileClient.getAllUserProfiles(),
+                throwable -> getAllUserProfilesFallback());
+    }
 
     public UserProfileDTO getUserProfile(Long id) {
         CircuitBreaker cbUserProfileService = circuitBreakerFactory.create("user-profile-service");
@@ -116,6 +125,9 @@ public class ManagerService implements IManagerService {
                 throwable -> deleteUserProfileFallback());
     }
 
+    private List<UserProfileDTO> getAllUserProfilesFallback() {
+        return new ArrayList<>();
+    }
     private UserProfileDTO getUserProfileFallback() {
         return new UserProfileDTO();
     }
@@ -128,4 +140,54 @@ public class ManagerService implements IManagerService {
     private UserProfileDTO deleteUserProfileFallback() {
         return new UserProfileDTO();
     }
+
+
+    public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
+        CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
+
+        return cbPortfolioService.run(
+                () -> portfolioClient.addPosition(idPortfolio, positionDTO),
+                throwable -> addPositionFallback());
+    }
+
+
+    public void deletePosition(Long id) {
+        CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
+
+        cbPortfolioService.run(
+            () -> portfolioClient.deletePosition(id),
+            throwable -> deletePositionFallback());
+    }
+
+    private PositionDTO addPositionFallback() {
+        return new PositionDTO();
+    }
+    private PositionDTO deletePositionFallback() {
+        return new PositionDTO();
+    }
+
+
+    public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
+        CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
+
+        return cbPortfolioService.run(
+            () -> portfolioClient.addPositionUpdate(idPosition, positionUpdateDTO),
+            throwable -> addPositionUpdateFallback());
+    }
+
+    public void deletePositionUpdate(Long id) {
+        CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
+
+        cbPortfolioService.run(
+            () -> portfolioClient.deletePositionUpdate(id),
+            throwable -> deletePositionUpdateFallback());
+    }
+
+    private PositionUpdateDTO addPositionUpdateFallback() {
+        return new PositionUpdateDTO();
+    }
+    private PositionUpdateDTO deletePositionUpdateFallback() {
+        return new PositionUpdateDTO();
+    }
+
 }

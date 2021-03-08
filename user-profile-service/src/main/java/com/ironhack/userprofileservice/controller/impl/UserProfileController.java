@@ -7,10 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserProfileController implements IUserProfileController {
     @Autowired
     private IUserProfileService service;
+
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserProfileDTO> getAllUserProfiles() {
+        return service.getAllUserProfiles();
+    }
 
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)

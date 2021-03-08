@@ -9,10 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserProfileService implements IUserProfileService {
     @Autowired
     private UserProfileRepository repository;
+
+    public List<UserProfileDTO> getAllUserProfiles() {
+        List<UserProfile> userProfiles = repository.findAll();
+        List<UserProfileDTO> userProfileDTOList = new ArrayList<>();
+        for(UserProfile userProfile: userProfiles) {
+            userProfileDTOList.add(new UserProfileDTO(userProfile));
+        }
+        return userProfileDTOList;
+    }
 
     public UserProfileDTO getUserProfile(Long id) {
         if (!repository.existsById(id))

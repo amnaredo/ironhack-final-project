@@ -25,33 +25,26 @@ public class PositionService implements IPositionService {
     }
 
     public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
-//        if(!portfolioRepository.existsById(idPortfolio))
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-//
-//        if (repository.findByCoinId(positionDTO.getCoinId()).isPresent())
-//            throw new ResponseStatusException(HttpStatus.CONFLICT);
-//
-//        Portfolio portfolio = portfolioRepository.findById(idPortfolio).get();
+
         Position position = new Position();
         position.setAmount(positionDTO.getAmount());
         position.setCoinId(positionDTO.getCoinId());
         position.setIdPortfolio(positionDTO.getIdPortfolio());
 
-//        PositionUpdate positionUpdate = new PositionUpdate();
-//        positionUpdate.setAmount(positionDTO.getAmount());
-//        positionUpdate.setDescription("Position creation");
-//        position.addPositionUpdate(positionUpdate);
-//
-//        portfolio.addPosition(position);
-
         return new PositionDTO(repository.save(position));
     }
 
-//    public void updatePosition(Long id, PositionDTO positionDTO) {
-//        if(!repository.findById(id))
+//    public PositionDTO updatePosition(Long id, PositionDTO positionDTO) {
+//        if(!repository.existsById(id))
 //            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 //
-//        Position position =
+//        Position position = repository.findById(id).get();
+//        position.setAmount(positionDTO.getAmount());
+//        position.setCoinId(positionDTO.getCoinId());
+//        position.setIdPortfolio(positionDTO.getIdPortfolio());
+//
+//        return new PositionDTO(repository.save(position));
+//
 //    }
 
     public PositionDTO deletePosition(Long id) {
@@ -71,8 +64,6 @@ public class PositionService implements IPositionService {
     }
 
     public List<PositionDTO> getPortfolioPositions(Long idPortfolio) {
-//        if(!portfolioRepository.existsById(idPortfolio))
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         List<Position> positions = repository.findByIdPortfolio(idPortfolio);
         List<PositionDTO> positionDTOList = new ArrayList<>();
