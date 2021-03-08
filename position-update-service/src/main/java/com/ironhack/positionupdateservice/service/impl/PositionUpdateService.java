@@ -26,6 +26,7 @@ public class PositionUpdateService implements IPositionUpdateService {
 
     public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
         PositionUpdate positionUpdate = new PositionUpdate();
+        positionUpdate.setIdPosition(idPosition);
         positionUpdate.setAmount(positionUpdateDTO.getAmount());
         positionUpdate.setDescription(positionUpdateDTO.getDescription());
 

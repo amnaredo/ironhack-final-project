@@ -3,11 +3,13 @@ package com.ironhack.portfolioservice.dto;
 //import com.ironhack.portfolioservice.model.PositionUpdate;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class PositionUpdateDTO {
     private Long id;
     private BigDecimal amount;
     private String description;
+    private LocalDateTime timestamp;
 
     public PositionUpdateDTO() {
     }
@@ -41,5 +43,13 @@ public class PositionUpdateDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

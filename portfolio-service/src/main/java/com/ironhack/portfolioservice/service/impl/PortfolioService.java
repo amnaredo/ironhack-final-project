@@ -46,6 +46,7 @@ public class PortfolioService implements IPortfolioService {
         portfolioDTO.setPositions(getPortfolioPositions(id));
 
         for(PositionDTO positionDTO: portfolioDTO.getPositions()) {
+            logger.info("AAAA");
             positionDTO.setUpdates(getUpdatePositions(positionDTO.getId()));
         }
 
@@ -178,7 +179,7 @@ public class PortfolioService implements IPortfolioService {
 
     public PositionDTO deletePosition(Long idPosition) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
-
+        logger.info("HOLA delete position");
         PositionDTO positionDTO = cbPositionService.run(
                 () -> positionClient.deletePosition(idPosition),
                 throwable -> deletePositionFallback());
@@ -199,7 +200,7 @@ public class PortfolioService implements IPortfolioService {
 
     public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
-
+        logger.info("Hola add position update");
         PositionUpdateDTO newPositionUpdateDTO = cbPositionUpdateService.run(
                 () -> positionUpdateClient.addPositionUpdate(idPosition, positionUpdateDTO),
                 throwable -> addPositionUpdateFallback());
@@ -220,6 +221,7 @@ public class PortfolioService implements IPortfolioService {
 
 
     private PositionUpdateDTO addPositionUpdateFallback() {
+        logger.info("Hola add position update FB");
         return new PositionUpdateDTO();
     }
 

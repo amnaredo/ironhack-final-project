@@ -59,4 +59,12 @@ public class PositionUpdate {
     public void setIdPosition(Long idPosition) {
         this.idPosition = idPosition;
     }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

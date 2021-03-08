@@ -161,7 +161,7 @@ public class ManagerService implements IManagerService {
 
     public void deletePosition(Long id) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
-
+        logger.info("Hola delete position");
         cbPortfolioService.run(
             () -> portfolioClient.deletePosition(id),
             throwable -> deletePositionFallback());
@@ -171,13 +171,14 @@ public class ManagerService implements IManagerService {
         return new PositionDTO();
     }
     private PositionDTO deletePositionFallback() {
+        logger.info("Hola delete position fallback");
         return new PositionDTO();
     }
 
 
     public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
-
+        logger.info("Hola add position update");
         return cbPortfolioService.run(
             () -> portfolioClient.addPositionUpdate(idPosition, positionUpdateDTO),
             throwable -> addPositionUpdateFallback());
@@ -192,6 +193,7 @@ public class ManagerService implements IManagerService {
     }
 
     private PositionUpdateDTO addPositionUpdateFallback() {
+        logger.info("Hola add position update");
         return new PositionUpdateDTO();
     }
     private PositionUpdateDTO deletePositionUpdateFallback() {

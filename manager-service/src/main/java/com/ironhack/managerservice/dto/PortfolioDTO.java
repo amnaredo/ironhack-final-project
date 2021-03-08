@@ -9,6 +9,7 @@ public class PortfolioDTO {
     private String name;
     private String description;
     private List<PositionDTO> positions;
+    private Long idUser;
 
     public PortfolioDTO() {
     }
@@ -43,5 +44,13 @@ public class PortfolioDTO {
 
     public void setPositions(List<PositionDTO> positions) {
         this.positions = positions;
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 }

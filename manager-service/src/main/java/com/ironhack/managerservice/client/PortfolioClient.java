@@ -31,7 +31,7 @@ public interface PortfolioClient {
     PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO);
 
     @DeleteMapping("/positions/{id}")
-    PositionDTO deletePosition(@RequestBody Long id);
+    PositionDTO deletePosition(@PathVariable Long id);
 
     @PostMapping("/positions/{idPosition}/updates")
     PositionUpdateDTO addPositionUpdate(@PathVariable Long idPosition, @RequestBody PositionUpdateDTO positionUpdateDTO);
