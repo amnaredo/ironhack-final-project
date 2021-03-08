@@ -36,7 +36,7 @@ public class ManagerController implements IManagerController {
         return service.addUserProfile(userProfileDTO);
     }
 
-    @PatchMapping("/users/{id}")
+    @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateUserProfile(@PathVariable Long id, @RequestBody UserProfileDTO userProfileDTO) {
         service.updateUserProfile(id, userProfileDTO);

@@ -118,7 +118,7 @@ public class ManagerService implements IManagerService {
 
     public void updateUserProfile(Long id, UserProfileDTO userProfileDTO) {
         CircuitBreaker cbUserProfileService = circuitBreakerFactory.create("user-profile-service");
-
+        logger.info("update user prfile");
         cbUserProfileService.run(
             () -> userProfileClient.updateUserProfile(id, userProfileDTO),
             throwable -> updateUserProfileFallback());
@@ -142,6 +142,7 @@ public class ManagerService implements IManagerService {
         return new UserProfileDTO();
     }
     private UserProfileDTO updateUserProfileFallback() {
+        logger.info("update user prfile F");
         return new UserProfileDTO();
     }
     private UserProfileDTO deleteUserProfileFallback() {

@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserProfileService implements IUserProfileService {
@@ -61,10 +62,13 @@ public class UserProfileService implements IUserProfileService {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        if (repository.findByEmail(userProfileDTO.getEmail()).isPresent())
+        // email check
+        UserProfile userProfile = repository.findById(id).get();
+        Optional<UserProfile> userProfileByEmail = repository.findByEmail(userProfileDTO.getEmail());
+
+        if (userProfileByEmail.isPresent() && !userProfileByEmail.get().getId().equals(userProfile.getId()))
             throw new ResponseStatusException(HttpStatus.CONFLICT);
 
-        UserProfile userProfile = repository.findById(id).get();
         userProfile.setEmail(userProfileDTO.getEmail());
         userProfile.setFirstName(userProfileDTO.getFirstName());
         userProfile.setLastName(userProfileDTO.getLastName());

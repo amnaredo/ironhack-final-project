@@ -62,6 +62,7 @@ public class PortfolioService implements IPortfolioService {
 
         Portfolio newPortfolio = repository.save(portfolio);
         portfolioDTO.setId(newPortfolio.getId());
+        portfolioDTO.setIdUserProfile(idUser);
 
         return portfolioDTO;
     }
@@ -174,6 +175,15 @@ public class PortfolioService implements IPortfolioService {
                 () -> positionClient.addPosition(idPortfolio, positionDTO),
                 throwable -> addPositionFallback());
 
+        // we add an opening update for this position
+        PositionUpdateDTO positionUpdateDTO = new PositionUpdateDTO();
+        positionUpdateDTO.setAmount(positionDTO.getAmount());
+        positionUpdateDTO.setDescription("Opened position for " + positionDTO.getCoinId());
+        CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
+        cbPositionUpdateService.run(
+                () -> positionUpdateClient.addPositionUpdate(newPositionDTO.getId(), positionUpdateDTO),
+                throwable -> addPositionUpdateFallback());
+
         return newPositionDTO;
     }
 
@@ -197,6 +207,9 @@ public class PortfolioService implements IPortfolioService {
         return new PositionDTO();
     }
 
+    private PositionDTO updatePositionFallback() {
+        return new PositionDTO();
+    }
 
     public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
@@ -204,6 +217,14 @@ public class PortfolioService implements IPortfolioService {
         PositionUpdateDTO newPositionUpdateDTO = cbPositionUpdateService.run(
                 () -> positionUpdateClient.addPositionUpdate(idPosition, positionUpdateDTO),
                 throwable -> addPositionUpdateFallback());
+
+        // now the amount of the position have to be updated too
+        PositionDTO positionDTO = new PositionDTO();
+        positionDTO.setAmount(positionUpdateDTO.getAmount());
+        CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
+        PositionDTO newPositionDTO = cbPositionService.run(
+                () -> positionClient.updatePosition(idPosition, positionDTO),
+                throwable -> updatePositionFallback());
 
         return newPositionUpdateDTO;
     }
@@ -228,4 +249,5 @@ public class PortfolioService implements IPortfolioService {
     private PositionUpdateDTO deletePositionUpdateFallback() {
         return new PositionUpdateDTO();
     }
+
 }

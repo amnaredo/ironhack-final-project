@@ -26,11 +26,11 @@ public class PositionController implements IPositionController {
         return service.addPosition(idPortfolio, positionDTO);
     }
 
-//    @PatchMapping("/positions/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public PositionDTO updatePosition(@PathVariable Long id, @RequestBody PositionDTO positionDTO) {
-//        return service.updatePosition(id, positionDTO);
-//    }
+    @PutMapping("/positions/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public PositionDTO updatePosition(@PathVariable Long id, @RequestBody PositionDTO positionDTO) {
+        return service.updatePosition(id, positionDTO);
+    }
 
     @DeleteMapping("/positions/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

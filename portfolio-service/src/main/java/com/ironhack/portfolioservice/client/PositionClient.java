@@ -15,8 +15,8 @@ public interface PositionClient {
     @PostMapping("/portfolios/{idPortfolio}/positions")
     PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO);
 
-//    @PatchMapping("/positions/{id}")
-//    PositionDTO updatePosition(@PathVariable Long id, @RequestBody PositionDTO positionDTO);
+    @PutMapping("/positions/{id}")
+    PositionDTO updatePosition(@PathVariable Long id, @RequestBody PositionDTO positionDTO);
 
     @DeleteMapping("/positions/{id}")
     PositionDTO deletePosition(@PathVariable Long id);

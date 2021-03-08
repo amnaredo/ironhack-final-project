@@ -1,7 +1,6 @@
 package com.ironhack.managerservice.dto;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PortfolioDTO {
@@ -9,7 +8,7 @@ public class PortfolioDTO {
     private String name;
     private String description;
     private List<PositionDTO> positions;
-    private Long idUser;
+    private Long idUserProfile;
 
     public PortfolioDTO() {
     }
@@ -46,11 +45,11 @@ public class PortfolioDTO {
         this.positions = positions;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public Long getIdUserProfile() {
+        return idUserProfile;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdUserProfile(Long idUserProfile) {
+        this.idUserProfile = idUserProfile;
     }
 }

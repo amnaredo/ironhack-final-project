@@ -34,6 +34,17 @@ public class PositionService implements IPositionService {
         return new PositionDTO(repository.save(position));
     }
 
+    public PositionDTO updatePosition(Long id, PositionDTO positionDTO) {
+        if(!repository.existsById(id))
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        Position position = repository.findById(id).get();
+        // just updates the amount
+        position.setAmount(positionDTO.getAmount());
+
+        return new PositionDTO(repository.save(position));
+    }
+
     public PositionDTO deletePosition(Long id) {
         if(!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
