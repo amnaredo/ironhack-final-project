@@ -1,7 +1,5 @@
 package com.ironhack.portfolioservice.dto;
 
-//import com.ironhack.portfolioservice.model.Position;
-
 import java.math.BigDecimal;
 import java.util.List;
 

@@ -8,8 +8,6 @@ import com.ironhack.portfolioservice.dto.PositionUpdateDTO;
 import com.ironhack.portfolioservice.model.Portfolio;
 import com.ironhack.portfolioservice.repository.PortfolioRepository;
 import com.ironhack.portfolioservice.service.interfaces.IPortfolioService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
@@ -34,7 +32,6 @@ public class PortfolioService implements IPortfolioService {
 
     private CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public PortfolioDTO getPortfolio(Long id) {
         if (!repository.existsById(id))
@@ -46,7 +43,6 @@ public class PortfolioService implements IPortfolioService {
         portfolioDTO.setPositions(getPortfolioPositions(id));
 
         for(PositionDTO positionDTO: portfolioDTO.getPositions()) {
-            logger.info("AAAA");
             positionDTO.setUpdates(getUpdatePositions(positionDTO.getId()));
         }
 
@@ -68,7 +64,6 @@ public class PortfolioService implements IPortfolioService {
     }
 
     public PortfolioDTO updatePortfolio(Long id, PortfolioDTO portfolioDTO) {
-        logger.info("HOLA");
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -76,7 +71,6 @@ public class PortfolioService implements IPortfolioService {
         portfolio.setName(portfolioDTO.getName());
         portfolio.setDescription(portfolioDTO.getDescription());
 
-        logger.info("HOLA");
         repository.save(portfolio);
         return new PortfolioDTO(portfolio);
     }
@@ -140,21 +134,17 @@ public class PortfolioService implements IPortfolioService {
     private List<PositionDTO> getPortfolioPositions(Long id) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
 
-        List<PositionDTO> positions = cbPositionService.run(
+        return cbPositionService.run(
                 () -> positionClient.getPortfolioPositions(id),
                 throwable -> getPortfolioPositionsFallback());
-
-        return positions;
     }
 
     private List<PositionUpdateDTO> getUpdatePositions(Long idPosition) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
 
-        List<PositionUpdateDTO> updates = cbPositionUpdateService.run(
+        return cbPositionUpdateService.run(
                 () -> positionUpdateClient.getPositionUpdates(idPosition),
                 throwable -> getPositionUpdatesFallback());
-
-        return updates;
     }
 
 
@@ -170,7 +160,6 @@ public class PortfolioService implements IPortfolioService {
     public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
 
-        logger.info("HOLA desde add position");
         PositionDTO newPositionDTO = cbPositionService.run(
                 () -> positionClient.addPosition(idPortfolio, positionDTO),
                 throwable -> addPositionFallback());
@@ -189,31 +178,27 @@ public class PortfolioService implements IPortfolioService {
 
     public PositionDTO deletePosition(Long idPosition) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
-        logger.info("HOLA delete position");
-        PositionDTO positionDTO = cbPositionService.run(
+
+        return cbPositionService.run(
                 () -> positionClient.deletePosition(idPosition),
                 throwable -> deletePositionFallback());
-
-        return positionDTO;
     }
 
 
     private PositionDTO addPositionFallback() {
-        logger.info("HOLA desde add position fallback");
         return new PositionDTO();
     }
-
     private PositionDTO deletePositionFallback() {
         return new PositionDTO();
     }
-
     private PositionDTO updatePositionFallback() {
         return new PositionDTO();
     }
 
+
     public PositionUpdateDTO addPositionUpdate(Long idPosition, PositionUpdateDTO positionUpdateDTO) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
-        logger.info("Hola add position update");
+
         PositionUpdateDTO newPositionUpdateDTO = cbPositionUpdateService.run(
                 () -> positionUpdateClient.addPositionUpdate(idPosition, positionUpdateDTO),
                 throwable -> addPositionUpdateFallback());
@@ -229,25 +214,19 @@ public class PortfolioService implements IPortfolioService {
         return newPositionUpdateDTO;
     }
 
-
     public PositionUpdateDTO deletePositionUpdate(Long idPositionUpdate) {
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
 
-        PositionUpdateDTO positionUpdateDTO = cbPositionUpdateService.run(
+        return cbPositionUpdateService.run(
                 () -> positionUpdateClient.deletePositionUpdate(idPositionUpdate),
                 throwable -> deletePositionUpdateFallback());
-
-        return positionUpdateDTO;
     }
 
 
     private PositionUpdateDTO addPositionUpdateFallback() {
-        logger.info("Hola add position update FB");
         return new PositionUpdateDTO();
     }
-
     private PositionUpdateDTO deletePositionUpdateFallback() {
         return new PositionUpdateDTO();
     }
-
 }

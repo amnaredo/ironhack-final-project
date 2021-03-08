@@ -1,9 +1,6 @@
 package com.ironhack.portfolioservice.dto;
 
 import com.ironhack.portfolioservice.model.Portfolio;
-//import com.ironhack.portfolioservice.model.Position;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PortfolioDTO {
@@ -22,10 +19,6 @@ public class PortfolioDTO {
         this.setIdUserProfile(portfolio.getIdUserProfile());
         this.setName(portfolio.getName());
         this.setDescription(portfolio.getDescription());
-//        this.positions = new ArrayList<>();
-//        for(Position position: portfolio.getPositions()) {
-//            this.positions.add(new PositionDTO(position));
-//        }
     }
 
     public String getName() {
