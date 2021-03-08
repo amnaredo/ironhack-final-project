@@ -59,6 +59,7 @@ public class PortfolioService implements IPortfolioService {
         Portfolio newPortfolio = repository.save(portfolio);
         portfolioDTO.setId(newPortfolio.getId());
         portfolioDTO.setIdUserProfile(idUser);
+        portfolioDTO.setPositions(new ArrayList<>());
 
         return portfolioDTO;
     }

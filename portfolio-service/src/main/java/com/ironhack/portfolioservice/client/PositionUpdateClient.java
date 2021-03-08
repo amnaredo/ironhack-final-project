@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient("position-update-service")
+@FeignClient("positionUpdate-service")
 public interface PositionUpdateClient {
 
     @GetMapping("/updates/{id}")

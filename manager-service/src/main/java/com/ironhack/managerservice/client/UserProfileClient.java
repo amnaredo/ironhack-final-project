@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient("user-profile-service")
+@FeignClient("userProfile-service")
 public interface UserProfileClient {
 
     @GetMapping("/users")
