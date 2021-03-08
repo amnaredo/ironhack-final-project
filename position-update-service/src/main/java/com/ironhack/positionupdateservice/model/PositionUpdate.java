@@ -13,6 +13,7 @@ public class PositionUpdate {
     private Long id;
     @CreationTimestamp
     private LocalDateTime timestamp;
+    @Column(precision = 20, scale = 8, columnDefinition="DECIMAL(20,8)")
     private BigDecimal amount;
     private String description;
     private Long idPosition;

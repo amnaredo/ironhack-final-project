@@ -7,6 +7,8 @@ import com.ironhack.managerservice.dto.PositionDTO;
 import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import com.ironhack.managerservice.dto.UserProfileDTO;
 import com.ironhack.managerservice.service.interfaces.IManagerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
@@ -25,6 +27,7 @@ public class ManagerService implements IManagerService {
 
     private CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public PortfolioDTO getPortfolio(Long id) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
@@ -47,6 +50,7 @@ public class ManagerService implements IManagerService {
     public void updatePortfolio(Long id, PortfolioDTO portfolioDTO) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
 
+        logger.info("Hola");
         cbPortfolioService.run(
             () -> portfolioClient.updatePortfolio(id, portfolioDTO),
             throwable -> updatePortfolioFallback());
@@ -55,6 +59,7 @@ public class ManagerService implements IManagerService {
     public void deletePortfolio(Long id) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
 
+        logger.info("Hola");
         cbPortfolioService.run(
                 () -> portfolioClient.deletePortfolio(id),
                 throwable -> deletePortfolioFallback());
@@ -75,9 +80,11 @@ public class ManagerService implements IManagerService {
         return new PortfolioDTO();
     }
     private PortfolioDTO updatePortfolioFallback() {
+        logger.info("Holafallback");
         return new PortfolioDTO();
     }
     private PortfolioDTO deletePortfolioFallback() {
+        logger.info("Holafallback");
         return new PortfolioDTO();
     }
     private List<PortfolioDTO> getUserPortfoliosFallback() {
@@ -145,6 +152,7 @@ public class ManagerService implements IManagerService {
     public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");
 
+        logger.info("Hola position");
         return cbPortfolioService.run(
                 () -> portfolioClient.addPosition(idPortfolio, positionDTO),
                 throwable -> addPositionFallback());

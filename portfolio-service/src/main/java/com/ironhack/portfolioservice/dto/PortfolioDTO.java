@@ -16,15 +16,17 @@ public class PortfolioDTO {
     public PortfolioDTO() {
     }
 
-//    public PortfolioDTO(Portfolio portfolio) {
-//        this();
-//        this.setName(portfolio.getName());
-//        this.setDescription(portfolio.getDescription());
+    public PortfolioDTO(Portfolio portfolio) {
+        this();
+        this.setId(portfolio.getId());
+        this.setIdUserProfile(portfolio.getIdUserProfile());
+        this.setName(portfolio.getName());
+        this.setDescription(portfolio.getDescription());
 //        this.positions = new ArrayList<>();
 //        for(Position position: portfolio.getPositions()) {
 //            this.positions.add(new PositionDTO(position));
 //        }
-//    }
+    }
 
     public String getName() {
         return name;

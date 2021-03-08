@@ -17,7 +17,7 @@ public interface PortfolioClient {
     @PostMapping("/users/{idUser}/portfolios")
     PortfolioDTO addPortfolio(@PathVariable Long idUser, @RequestBody PortfolioDTO portfolioDTO);
 
-    @PatchMapping("/portfolios/{id}")
+    @PutMapping("/portfolios/{id}")
     PortfolioDTO updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO);
 
     @DeleteMapping("/portfolios/{id}")

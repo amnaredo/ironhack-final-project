@@ -10,6 +10,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String coinId;
+    @Column(precision = 20, scale = 8, columnDefinition="DECIMAL(20,8)")
     private BigDecimal amount;
     private Long idPortfolio;
 

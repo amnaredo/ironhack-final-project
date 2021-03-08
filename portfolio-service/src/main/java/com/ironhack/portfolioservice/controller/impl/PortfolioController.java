@@ -28,7 +28,7 @@ public class PortfolioController implements IPortfolioController {
         return service.addPortfolio(idUser, portfolioDTO);
     }
 
-    @PatchMapping("/portfolios/{id}")
+    @PutMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public PortfolioDTO updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO) {
         return service.updatePortfolio(id, portfolioDTO);
@@ -36,13 +36,13 @@ public class PortfolioController implements IPortfolioController {
 
     @DeleteMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public PortfolioDTO deletePortfolio(Long id) {
+    public PortfolioDTO deletePortfolio(@PathVariable Long id) {
         return service.deletePortfolio(id);
     }
 
     @GetMapping("/users/{idUser}/portfolios")
     @ResponseStatus(HttpStatus.OK)
-    public List<PortfolioDTO> getUserPortfolios(@RequestBody Long idUser) {
+    public List<PortfolioDTO> getUserPortfolios(@PathVariable Long idUser) {
         return service.getUserPortfolios(idUser);
     }
 

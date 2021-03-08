@@ -27,25 +27,12 @@ public class PositionService implements IPositionService {
     public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
 
         Position position = new Position();
+        position.setIdPortfolio(idPortfolio);
         position.setAmount(positionDTO.getAmount());
         position.setCoinId(positionDTO.getCoinId());
-        position.setIdPortfolio(positionDTO.getIdPortfolio());
 
         return new PositionDTO(repository.save(position));
     }
-
-//    public PositionDTO updatePosition(Long id, PositionDTO positionDTO) {
-//        if(!repository.existsById(id))
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-//
-//        Position position = repository.findById(id).get();
-//        position.setAmount(positionDTO.getAmount());
-//        position.setCoinId(positionDTO.getCoinId());
-//        position.setIdPortfolio(positionDTO.getIdPortfolio());
-//
-//        return new PositionDTO(repository.save(position));
-//
-//    }
 
     public PositionDTO deletePosition(Long id) {
         if(!repository.existsById(id))

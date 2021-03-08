@@ -8,6 +8,8 @@ import com.ironhack.portfolioservice.dto.PositionUpdateDTO;
 import com.ironhack.portfolioservice.model.Portfolio;
 import com.ironhack.portfolioservice.repository.PortfolioRepository;
 import com.ironhack.portfolioservice.service.interfaces.IPortfolioService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
@@ -32,15 +34,14 @@ public class PortfolioService implements IPortfolioService {
 
     private CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public PortfolioDTO getPortfolio(Long id) {
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         Portfolio portfolio = repository.findById(id).get();
-        PortfolioDTO portfolioDTO = new PortfolioDTO();
-        portfolioDTO.setName(portfolio.getName());
-        portfolioDTO.setDescription(portfolio.getDescription());
+        PortfolioDTO portfolioDTO = new PortfolioDTO(portfolio);
 
         portfolioDTO.setPositions(getPortfolioPositions(id));
 
@@ -54,9 +55,9 @@ public class PortfolioService implements IPortfolioService {
     public PortfolioDTO addPortfolio(Long idUser, PortfolioDTO portfolioDTO) {
 
         Portfolio portfolio = new Portfolio();
+        portfolio.setIdUserProfile(idUser);
         portfolio.setName(portfolioDTO.getName());
         portfolio.setDescription(portfolioDTO.getDescription());
-        portfolio.setUserProfile(portfolioDTO.getIdUserProfile());
 
         Portfolio newPortfolio = repository.save(portfolio);
         portfolioDTO.setId(newPortfolio.getId());
@@ -65,6 +66,7 @@ public class PortfolioService implements IPortfolioService {
     }
 
     public PortfolioDTO updatePortfolio(Long id, PortfolioDTO portfolioDTO) {
+        logger.info("HOLA");
         if (!repository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -72,8 +74,9 @@ public class PortfolioService implements IPortfolioService {
         portfolio.setName(portfolioDTO.getName());
         portfolio.setDescription(portfolioDTO.getDescription());
 
+        logger.info("HOLA");
         repository.save(portfolio);
-        return portfolioDTO;
+        return new PortfolioDTO(portfolio);
     }
 
     public PortfolioDTO deletePortfolio(Long id) {
@@ -165,6 +168,7 @@ public class PortfolioService implements IPortfolioService {
     public PositionDTO addPosition(Long idPortfolio, PositionDTO positionDTO) {
         CircuitBreaker cbPositionService = circuitBreakerFactory.create("position-service");
 
+        logger.info("HOLA desde add position");
         PositionDTO newPositionDTO = cbPositionService.run(
                 () -> positionClient.addPosition(idPortfolio, positionDTO),
                 throwable -> addPositionFallback());
@@ -184,6 +188,7 @@ public class PortfolioService implements IPortfolioService {
 
 
     private PositionDTO addPositionFallback() {
+        logger.info("HOLA desde add position fallback");
         return new PositionDTO();
     }
 

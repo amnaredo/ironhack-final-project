@@ -58,7 +58,7 @@ public class Portfolio {
         return idUserProfile;
     }
 
-    public void setUserProfile(Long idUserProfile) {
+    public void setIdUserProfile(Long idUserProfile) {
         this.idUserProfile = idUserProfile;
     }
 

@@ -59,7 +59,7 @@ public class ManagerController implements IManagerController {
         return service.addPortfolio(idUser, portfolioDTO);
     }
 
-    @PatchMapping("/portfolios/{id}")
+    @PutMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePortfolio(@PathVariable Long id, @RequestBody PortfolioDTO portfolioDTO) {
         service.updatePortfolio(id, portfolioDTO);
