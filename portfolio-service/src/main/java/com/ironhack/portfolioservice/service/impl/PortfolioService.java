@@ -169,10 +169,11 @@ public class PortfolioService implements IPortfolioService {
         positionUpdateDTO.setAmount(positionDTO.getAmount());
         positionUpdateDTO.setDescription("Opened position for " + positionDTO.getCoinId());
         CircuitBreaker cbPositionUpdateService = circuitBreakerFactory.create("position-update-service");
-        cbPositionUpdateService.run(
+        PositionUpdateDTO newPositionUpdateDTO = cbPositionUpdateService.run(
                 () -> positionUpdateClient.addPositionUpdate(newPositionDTO.getId(), positionUpdateDTO),
                 throwable -> addPositionUpdateFallback());
 
+        newPositionDTO.setUpdates(new ArrayList<>(List.of(newPositionUpdateDTO)));
         return newPositionDTO;
     }
 
