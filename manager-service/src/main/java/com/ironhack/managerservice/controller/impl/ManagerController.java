@@ -95,7 +95,7 @@ public class ManagerController implements IManagerController {
         return service.addPositionUpdate(idPosition, positionUpdateDTO);
     }
 
-    @DeleteMapping("/positions/{id}")
+    @DeleteMapping("/updates/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePositionUpdate(@PathVariable Long id) {
         service.deletePositionUpdate(id);
