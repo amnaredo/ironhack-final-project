@@ -1,0 +1,21 @@
+<div>
+    <h2>{{portfolio?.name}}</h2>
+    <p>{{portfolio?.description}}</p>
+    <div class="positions">
+        <ul>
+            <li *ngFor="let position of portfolio?.positions">
+                <ul>
+                    <li>Coin: {{position.coinId}}</li>
+                    <li>Amount: {{position.amount}}</li>
+                    <li>Updates: </li>
+                    <ul>
+                        <li *ngFor="let update of position.updates">
+                            {{update.timestamp}} | {{update.description}} | {{update.amount}}
+                        </li>
+                    </ul>
+                </ul>
+            </li>
+        </ul>    
+    </div>
+    <a [routerLink]="['/portfolios/']">Go back to portfolios</a>
+</div>

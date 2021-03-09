@@ -24,6 +24,7 @@ public class ManagerController implements IManagerController {
         return service.getAllUserProfiles();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public UserProfileDTO getUserProfile(@PathVariable Long id) {
@@ -47,6 +48,8 @@ public class ManagerController implements IManagerController {
     public void deleteUserProfile(@PathVariable Long id) {
         service.deleteUserProfile(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PortfolioDTO getPortfolio(@PathVariable Long id) {
@@ -71,6 +74,7 @@ public class ManagerController implements IManagerController {
         service.deletePortfolio(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/users/{idUser}/portfolios")
     @ResponseStatus(HttpStatus.OK)
     public List<PortfolioDTO> getUserPortfolios(@PathVariable Long idUser) {

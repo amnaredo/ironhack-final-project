@@ -15,4 +15,8 @@ export class PortfolioService {
   getUserPortfolios(idUser: number): Observable<Portfolio[]> {
     return this.http.get<Portfolio[]>('http://localhost:8080/users/' + idUser + '/portfolios');
   }
+
+  getPortfolio(id: number): Observable<Portfolio> {
+    return this.http.get<Portfolio>('http://localhost:8080/portfolios/' + id);
+  }
 }

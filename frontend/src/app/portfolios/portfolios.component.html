@@ -1,9 +1,4 @@
-<ul>
-    <li *ngFor="let portfolio of portfolios">
-        {{portfolio.id}} | 
-        {{portfolio.name}} | 
-        {{portfolio.description}} | 
-        {{portfolio.idUserProfile}} |
-        {{portfolio.positions}}
-    </li>
-</ul>
+<div class="container">
+    <app-portfolio-item *ngFor="let portfolio of portfolios" [portfolio]="portfolio"></app-portfolio-item>
+</div>
+

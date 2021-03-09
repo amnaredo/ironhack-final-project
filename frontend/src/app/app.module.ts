@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PortfoliosComponent } from './portfolios/portfolios.component';
 import { SearchComponent } from './search/search.component';
+import { PortfolioItemComponent } from './portfolio-item/portfolio-item.component';
+import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     PortfoliosComponent,
-    SearchComponent
+    SearchComponent,
+    PortfolioItemComponent,
+    PortfolioDetailsComponent
   ],
   imports: [
     BrowserModule,
