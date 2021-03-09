@@ -1,3 +1,5 @@
+import {Position } from './position'
+
 export class Portfolio {
 
     // private Long id;
@@ -9,7 +11,8 @@ export class Portfolio {
         private _id: number,
         private _name: string,
         private _description: string,
-        private _idUserProfile: number
+        private _idUserProfile: number,
+        private _positions: Position[]
     ) {  
     }
 
@@ -29,6 +32,10 @@ export class Portfolio {
         return this._idUserProfile;
     }
 
+    public get positions(): Position[] {
+        return this._positions;
+    }
+
     public set id(id: number) {
         this._id = id;
     }
@@ -43,6 +50,10 @@ export class Portfolio {
 
     public set idUserProfile(idUserProfile: number) {
         this._idUserProfile = idUserProfile;
+    }
+
+    public set positions(positions: Position[]) {
+        this._positions = positions;
     }
     
 }
