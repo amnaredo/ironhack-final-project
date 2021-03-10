@@ -9,6 +9,7 @@ import { PortfoliosComponent } from './portfolios/portfolios.component';
 import { SearchComponent } from './search/search.component';
 import { PortfolioItemComponent } from './portfolio-item/portfolio-item.component';
 import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
