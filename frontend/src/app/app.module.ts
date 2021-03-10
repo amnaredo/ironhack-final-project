@@ -9,7 +9,7 @@ import { PortfoliosComponent } from './portfolios/portfolios.component';
 import { SearchComponent } from './search/search.component';
 import { PortfolioItemComponent } from './portfolio-item/portfolio-item.component';
 import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { CoinDetailsComponent } from './coin-details/coin-details.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

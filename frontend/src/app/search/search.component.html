@@ -1,5 +1,9 @@
-<ul>
+<!-- <ul>
     <li *ngFor="let coinItem of coinItemList">
         <a [routerLink]="['/search/', coinItem.id]">{{coinItem.id}} | {{coinItem.name}} | {{coinItem.symbol}}</a>
     </li>
-</ul>
+</ul> -->
+
+<select [(ngModel)]="selectedCoinItem" (change)="onChangeCoin(selectedCoinItem)">
+    <option *ngFor="let coinItem of coinItemList" [ngValue]="coinItem"><b>[{{coinItem.symbol}}]</b> {{coinItem.name}}</option>
+</select>

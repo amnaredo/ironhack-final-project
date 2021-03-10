@@ -1,0 +1,9 @@
+.error-msg {
+    color: red;
+    font-size: 12px;
+  }
+
+  img {
+    border-radius: 50%;
+    border: 5px solid #80b5ea;
+  }

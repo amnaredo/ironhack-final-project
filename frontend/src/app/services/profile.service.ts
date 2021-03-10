@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/profile';
@@ -29,7 +29,11 @@ export class ProfileService {
   updateProfile(id: number, profile: Profile): Observable<{}> {
     let body = JSON.stringify(profile);
     body = body.replace(/"_/g, '"');
-    return this.http.put('http://localhost:8080/users/' + id, body);
+    console.log(body);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.put('http://localhost:8080/users/' + id, body, httpOptions);
   }
 
   deleteProfile(id: number): Observable<{}> {

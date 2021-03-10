@@ -1,5 +1,32 @@
-<p>{{profile.id}}</p>
+<!-- <p>{{profile.id}}</p>
 <p>{{profile.firstName}}</p>
 <p>{{profile.lastName}}</p>
 <p>{{profile.email}}</p>
 <p>{{profile.photoUrl}}</p>
+ -->
+<img src="{{photoUrl}}" alt="Profile photo" width="170" height="170">
+
+
+<div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+      <label for="firstname">First name:</label><br>
+      <input formControlName="firstname" type="text" name="firstname" [(ngModel)]="profile.firstName"><br>
+      <p class="error-msg" *ngIf="firstNameField.invalid && firstNameField.touched">First name is required</p>
+
+      <label for="lastname">Last name:</label><br>
+      <input formControlName="lastname" type="text" name="lastname" [(ngModel)]="profile.lastName"><br>
+      <p class="error-msg" *ngIf="lastNameField.invalid && lastNameField.touched">Last name is required</p>
+
+      <label for="email">Email:</label><br>
+      <input formControlName="email" type="email" name="email" [(ngModel)]="profile.email"><br>
+      <p class="error-msg" *ngIf="emailField.invalid && emailField.touched">Email is required</p>
+  
+      <label for="photourl">Photo URL:</label><br>
+      <input formControlName="photourl" type="text" name="photourl" [(ngModel)]="profile.photoUrl"><br>
+
+      <br>
+      <button type="submit" [disabled]="form.invalid">Update profile</button>
+  
+    </form>
+  </div>
