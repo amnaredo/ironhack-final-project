@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
     //A string array with the Pokemon name filtered according the text input
     filteredOptions: Observable<string[]> | undefined;
     //The Pokemon List with the name and the url
-    cointItemList: CoinItem[] = [];
+    coinItemList: CoinItem[] = [];
     // //The id of the Pokémon selected
     // selectedPokediv: number | undefined;
     // //The id of the Pokémon hovered
@@ -41,6 +41,14 @@ export class SearchComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       );
+
+    //Get all the Pokemon names when the page charges
+    this.coinApiService.getCoinsList().subscribe(dataResult => {
+      dataResult.forEach(result => {
+        this.coinItemList.push(new CoinItem(result.id, result.symbol, result.name));
+        this.content.push(result.id);
+      })
+    });
   }
 
   //An utility function for the autocompletion
