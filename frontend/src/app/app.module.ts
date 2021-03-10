@@ -10,6 +10,7 @@ import { SearchComponent } from './search/search.component';
 import { PortfolioItemComponent } from './portfolio-item/portfolio-item.component';
 import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details.component';
 import { FormsModule } from '@angular/forms';
+import { CoinDetailsComponent } from './coin-details/coin-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     PortfoliosComponent,
     SearchComponent,
     PortfolioItemComponent,
-    PortfolioDetailsComponent
+    PortfolioDetailsComponent,
+    CoinDetailsComponent
   ],
   imports: [
     BrowserModule,

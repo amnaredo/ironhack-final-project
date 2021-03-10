@@ -1,5 +1,5 @@
 <ul>
     <li *ngFor="let coinItem of coinItemList">
-        {{coinItem.id}} | {{coinItem.name}} | {{coinItem.symbol}}
+        <a [routerLink]="['/search/', coinItem.id]">{{coinItem.id}} | {{coinItem.name}} | {{coinItem.symbol}}</a>
     </li>
 </ul>
