@@ -22,8 +22,9 @@
     <li *ngIf="showUpdates">
         <ul>
             <li *ngFor="let update of position.updates.reverse()">
-                {{update.timestamp}} | {{update.description}} | {{update.amount}}
+                {{update.timestamp}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
             </li>
         </ul>
     </li>
+    <button (click)="onDeletePosition()">Delete position</button>
 </ul>

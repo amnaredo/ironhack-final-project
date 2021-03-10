@@ -5,11 +5,20 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class PositionUpdateDTO {
+    private Long id;
     private BigDecimal amount;
     private String description;
     private LocalDateTime timestamp;
 
     public PositionUpdateDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getAmount() {

@@ -33,6 +33,10 @@ export class PortfolioService {
     // return this.http.post<Position>('http://localhost:8080/portfolios/' + id + '/positions', body);
   }
 
+  deletePosition(id: number): Observable<{}> {
+    return this.http.delete('http://localhost:8080/positions/' + id);
+  }
+
   updatePosition(id: number, updatePosition:PositionUpdate): Observable<PositionUpdate> {
     let body = JSON.stringify(updatePosition);
     body = body.replace(/"_/g, '"');
@@ -41,6 +45,10 @@ export class PortfolioService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }
     return this.http.post<PositionUpdate>('http://localhost:8080/positions/' + id + '/updates', body, httpOptions);
+  }
+
+  deletePositionUpdate(id: number): Observable<{}> {
+    return this.http.delete('http://localhost:8080/updates/' + id);
   }
 
 

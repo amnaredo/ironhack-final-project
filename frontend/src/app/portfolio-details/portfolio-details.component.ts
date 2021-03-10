@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
+import { Position } from '../models/position';
 import { PositionUpdate } from '../models/position-update';
 import { PortfolioService } from '../services/portfolio.service';
 
@@ -37,19 +38,36 @@ export class PortfolioDetailsComponent implements OnInit {
   }
 
 
-  deletePosition(idPosition: number): void {
-
-  }
-
-  updatePosition(idPosition: number, update: {amount: number, description:string}): void {
-    this.portfolioService.updatePosition(idPosition, new PositionUpdate(update.amount, update.description, '')).subscribe(dataResult => {
-      this.router.navigate(['portfolios/' + this.portfolio.id])
+  deletePosition(position: Position): void {
+    this.portfolioService.deletePosition(position.id).subscribe( dataResult => {
+      const index = this.portfolio.positions.indexOf(position, 0);
+      if (index > -1) {
+        this.portfolio.positions.splice(index, 1);
+      }
     });
   }
 
-  deletePositionUpdate(idPositionUpdate: number): void {
-
+  updatePosition(position: Position, update: {amount: number, description:string}): void {
+    this.portfolioService.updatePosition(position.id, new PositionUpdate(0, update.amount, update.description, '')).subscribe(dataResult => {
+      const index = this.portfolio.positions.indexOf(position, 0);
+      if (index > -1) {
+        this.portfolio.positions[index].updates.push(dataResult);
+        this.portfolio.positions[index].amount = dataResult.amount;
+      }
+    });
   }
 
+  deletePositionUpdate(position: Position, positionUpdate: PositionUpdate): void {
+    this.portfolioService.deletePositionUpdate(positionUpdate.id).subscribe(dataResult => {
+      const indexPosition = this.portfolio.positions.indexOf(position, 0);
+      if (indexPosition > -1) {
+        const indexUpdate = this.portfolio.positions[indexPosition].updates.indexOf(positionUpdate);
+        if (indexUpdate > -1) {
+          this.portfolio.positions[indexPosition].updates.splice(indexUpdate, 0);
+          console.log("deleted");
+        }
+      }
+    });
+  }
 
 }

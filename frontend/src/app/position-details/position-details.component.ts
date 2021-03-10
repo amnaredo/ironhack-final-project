@@ -48,7 +48,16 @@ export class PositionDetailsComponent implements OnInit {
       description: this.descriptionField.value,
     }
     this.updatePositionEvent.emit(values)
-    this.position.amount = values.amount;
-    this.position.updates.push(new PositionUpdate(values.amount, values.description, 'just now!'))
+    // this.position.amount = values.amount;
+    // this.position.updates.push(new PositionUpdate(0, values.amount, values.description, 'just now!'))
+  }
+
+  onDeletePosition(): void {
+    this.deletePositionEvent.emit(this.position);
+  }
+
+  onDeletePositionUpdate(positionUpdate: PositionUpdate): void {
+    // console.log(positionUpdate);
+    this.deletePositionUpdateEvent.emit(positionUpdate);
   }
 }
