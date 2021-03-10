@@ -11,6 +11,7 @@ import { PortfolioItemComponent } from './portfolio-item/portfolio-item.componen
 import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
+import { PositionDetailsComponent } from './position-details/position-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CoinDetailsComponent } from './coin-details/coin-details.component';
     SearchComponent,
     PortfolioItemComponent,
     PortfolioDetailsComponent,
-    CoinDetailsComponent
+    CoinDetailsComponent,
+    PositionDetailsComponent
   ],
   imports: [
     BrowserModule,

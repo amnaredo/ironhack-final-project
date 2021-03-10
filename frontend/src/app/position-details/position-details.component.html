@@ -1,0 +1,12 @@
+<ul>
+    <li>Coin: {{position.coinId}}</li>
+    <li>Amount: {{position.amount}}</li>
+    <button (click)="toggleShowUpdates()">{{showUpdates ? 'Hide updates' : 'Show updates'}}</button>
+    <li *ngIf="showUpdates">
+        <ul>
+            <li *ngFor="let update of position.updates">
+                {{update.timestamp}} | {{update.description}} | {{update.amount}}
+            </li>
+        </ul>
+    </li>
+</ul>
