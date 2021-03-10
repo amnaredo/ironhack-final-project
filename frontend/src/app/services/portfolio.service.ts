@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Portfolio } from '../models/portfolio';
+import { Position } from '../models/position';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,17 @@ export class PortfolioService {
   getPortfolio(id: number): Observable<Portfolio> {
     return this.http.get<Portfolio>('http://localhost:8080/portfolios/' + id);
   }
+
+  addPosition(id: number, position: Position): Observable<Position> {
+    let body = JSON.stringify(position);
+    body = body.replace(/"_/g, '"');
+    console.log(body);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<Position>('http://localhost:8080/portfolios/' + id + '/positions', body, httpOptions);
+    // return this.http.post<Position>('http://localhost:8080/portfolios/' + id + '/positions', body);
+  }
+
+
 }

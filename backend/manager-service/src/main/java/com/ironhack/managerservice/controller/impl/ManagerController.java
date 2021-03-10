@@ -6,6 +6,8 @@ import com.ironhack.managerservice.dto.PositionDTO;
 import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import com.ironhack.managerservice.dto.UserProfileDTO;
 import com.ironhack.managerservice.service.interfaces.IManagerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @RestController
 public class ManagerController implements IManagerController {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private IManagerService service;
 
@@ -82,9 +85,11 @@ public class ManagerController implements IManagerController {
         return service.getUserPortfolios(idUser);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/portfolios/{idPortfolio}/positions")
     @ResponseStatus(HttpStatus.CREATED)
     public PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO) {
+        logger.info("HOLAAAAAAAAAAAA");
         return service.addPosition(idPortfolio, positionDTO);
     }
 

@@ -8,6 +8,8 @@ import com.ironhack.portfolioservice.dto.PositionUpdateDTO;
 import com.ironhack.portfolioservice.model.Portfolio;
 import com.ironhack.portfolioservice.repository.PortfolioRepository;
 import com.ironhack.portfolioservice.service.interfaces.IPortfolioService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;

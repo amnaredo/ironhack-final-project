@@ -12,5 +12,23 @@
 
 </ul>
 
-<!-- <hr> -->
-<!-- <app-search></app-search> -->
+<div class="container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  
+      <label for="amount">Amount: </label><br>
+      <input formControlName="amount" type="number" name="amount"><br>
+      <p class="error-msg" *ngIf="amountField.invalid && amountField.touched">Amount is required</p>
+
+      <label for="portfolio">Portfolio: </label> <br>
+      <select formControlName="portfolio" name="portfolio" [(ngModel)]="selectedPortfolio">
+          <option *ngFor="let portfolio of portfolios" [ngValue]="portfolio">{{portfolio.name}}</option>
+      </select>
+      <p class="error-msg" *ngIf="portfolioField.invalid && portfolioField.touched">Portfolio is required</p>
+      <br><br>
+
+
+      <br>
+      <button type="submit" [disabled]="form.invalid">Add position</button>
+  
+    </form>
+  </div>

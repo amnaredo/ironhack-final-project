@@ -7,6 +7,8 @@ import com.ironhack.managerservice.dto.PositionDTO;
 import com.ironhack.managerservice.dto.PositionUpdateDTO;
 import com.ironhack.managerservice.dto.UserProfileDTO;
 import com.ironhack.managerservice.service.interfaces.IManagerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
@@ -24,6 +26,7 @@ public class ManagerService implements IManagerService {
     private UserProfileClient userProfileClient;
 
     private CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
+
 
     public PortfolioDTO getPortfolio(Long id) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");

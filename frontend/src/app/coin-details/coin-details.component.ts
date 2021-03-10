@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Coin } from '../models/coin';
 import { CoinApiService } from '../services/coin-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PortfolioService } from '../services/portfolio.service';
+import { Portfolio } from '../models/portfolio';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Position } from '../models/position';
 
 @Component({
   selector: 'app-coin-details',
@@ -10,16 +14,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CoinDetailsComponent implements OnInit {
 
-  coin: Coin | undefined;
+  coin!: Coin;
+
+  portfolios!: Portfolio[];
+  selectedPortfolio! : Portfolio;
+
+  form: FormGroup;
+
+  amountField: FormControl;
+  portfolioField: FormControl;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private coinApiService: CoinApiService
-  ) { }
+    private coinApiService: CoinApiService,
+    private portfolioService: PortfolioService,
+  ) {
+    this.amountField = new FormControl('', [ Validators.required, Validators.min(0) ]);
+    this.portfolioField = new FormControl('', [ Validators.required ]);
+ 
+    // Initialzie Form Group
+    this.form = new FormGroup({
+      amount: this.amountField,
+      portfolio: this.portfolioField,
+    });
+   }
 
   ngOnInit(): void {
     this.getById();
+    this.getPortfolios(1);
   }
 
 
@@ -45,5 +69,19 @@ export class CoinDetailsComponent implements OnInit {
       this.coin = newCoin;
     });
   }
+
+  getPortfolios(idUser: number): void {
+    this.portfolioService.getUserPortfolios(idUser).subscribe( dataResult => {
+      this.portfolios = dataResult;
+    });
+  }
+
+  onSubmit(): void {
+    let newPosition = new Position(0, this.coin.id, this.amountField.value, [])
+    this.portfolioService.addPosition(this.selectedPortfolio.id, newPosition).subscribe(dataResult => {
+      alert('A position has been added to your portfolio!');
+    });
+  }
+
 
 }
