@@ -89,22 +89,24 @@ public class ManagerController implements IManagerController {
     @PostMapping("/portfolios/{idPortfolio}/positions")
     @ResponseStatus(HttpStatus.CREATED)
     public PositionDTO addPosition(@PathVariable Long idPortfolio, @RequestBody PositionDTO positionDTO) {
-        logger.info("HOLAAAAAAAAAAAA");
         return service.addPosition(idPortfolio, positionDTO);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/positions/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePosition(@PathVariable Long id) {
         service.deletePosition(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/positions/{idPosition}/updates")
     @ResponseStatus(HttpStatus.CREATED)
     public PositionUpdateDTO addPositionUpdate(@PathVariable Long idPosition, @RequestBody PositionUpdateDTO positionUpdateDTO) {
         return service.addPositionUpdate(idPosition, positionUpdateDTO);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/updates/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePositionUpdate(@PathVariable Long id) {

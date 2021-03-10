@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
+import { PositionUpdate } from '../models/position-update';
 import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -34,5 +35,21 @@ export class PortfolioDetailsComponent implements OnInit {
       // error => this.router.navigate(['/portfolios'])
     )
   }
+
+
+  deletePosition(idPosition: number): void {
+
+  }
+
+  updatePosition(idPosition: number, update: {amount: number, description:string}): void {
+    this.portfolioService.updatePosition(idPosition, new PositionUpdate(update.amount, update.description, '')).subscribe(dataResult => {
+      this.router.navigate(['portfolios/' + this.portfolio.id])
+    });
+  }
+
+  deletePositionUpdate(idPositionUpdate: number): void {
+
+  }
+
 
 }

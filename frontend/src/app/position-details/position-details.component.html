@@ -1,10 +1,27 @@
 <ul>
     <li>Coin: {{position.coinId}}</li>
     <li>Amount: {{position.amount}}</li>
+
+    <li>Update amount of this position: </li>
+    <form (ngSubmit)="onUpdatePosition()" [formGroup]="form">
+  
+      <label for="amount">New amount: </label><br>
+      <input formControlName="amount" type="number" name="amount"><br>
+      <p class="error-msg" *ngIf="amountField.invalid && amountField.touched">Amount is required</p>
+
+      <label for="description">Description: </label> <br>
+      <input formControlName="description" type="text" name="amount"><br>
+      <p class="error-msg" *ngIf="descriptionField.invalid && descriptionField.touched">Description is required</p>
+      <br>
+      <button type="submit" [disabled]="form.invalid">Update position amount</button>
+  
+    </form>
+
+
     <button (click)="toggleShowUpdates()">{{showUpdates ? 'Hide updates' : 'Show updates'}}</button>
     <li *ngIf="showUpdates">
         <ul>
-            <li *ngFor="let update of position.updates">
+            <li *ngFor="let update of position.updates.reverse()">
                 {{update.timestamp}} | {{update.description}} | {{update.amount}}
             </li>
         </ul>

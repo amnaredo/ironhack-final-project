@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Portfolio } from '../models/portfolio';
 import { Position } from '../models/position';
+import { PositionUpdate } from '../models/position-update';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,16 @@ export class PortfolioService {
     }
     return this.http.post<Position>('http://localhost:8080/portfolios/' + id + '/positions', body, httpOptions);
     // return this.http.post<Position>('http://localhost:8080/portfolios/' + id + '/positions', body);
+  }
+
+  updatePosition(id: number, updatePosition:PositionUpdate): Observable<PositionUpdate> {
+    let body = JSON.stringify(updatePosition);
+    body = body.replace(/"_/g, '"');
+    console.log(body);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post<PositionUpdate>('http://localhost:8080/positions/' + id + '/updates', body, httpOptions);
   }
 
 

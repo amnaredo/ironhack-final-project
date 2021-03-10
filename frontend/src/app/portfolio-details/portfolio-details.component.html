@@ -2,8 +2,8 @@
     <h2>{{portfolio?.name}}</h2>
     <p>{{portfolio?.description}}</p>
     <div class="positions">
-        <div *ngFor="let position of portfolio.positions">
-            <app-position-details [position]="position"></app-position-details>
+        <div *ngFor="let position of portfolio?.positions">
+            <app-position-details [position]="position" (updatePositionEvent)="updatePosition(position.id, $event)"></app-position-details>
         </div>    
     </div>
     <a [routerLink]="['/portfolios/']">Go back to portfolios</a>
