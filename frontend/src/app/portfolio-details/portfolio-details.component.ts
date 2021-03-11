@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
 import { Position } from '../models/position';
 import { PositionUpdate } from '../models/position-update';
+import { CoinApiService } from '../services/coin-api.service';
 import { PortfolioService } from '../services/portfolio.service';
 
 @Component({
@@ -15,12 +16,17 @@ export class PortfolioDetailsComponent implements OnInit {
 
   portfolio: Portfolio = new Portfolio(0, '', '', 1, []);
 
+  totalValue: number = 0;
+  coinSymbols: string[] = [];
+  coinLogosUrl: string[] = [];
+
   form: FormGroup;
 
   nameField: FormControl;
   descriptionField: FormControl;
 
   constructor(
+    private coinApiService: CoinApiService,
     private portfolioService: PortfolioService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -38,21 +44,30 @@ export class PortfolioDetailsComponent implements OnInit {
     this.getById();
   }
 
-
   getById(): void {
-    // const checkHasId: boolean = this.activatedRoute.snapshot.paramMap.has('id');
-    // if (!checkHasId)
-    //   this.router.navigate(['/portfolios'])
-
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.portfolioService.getPortfolio(id).subscribe(
       portfolio => {
         this.portfolio = portfolio;
         this.nameField.setValue(this.portfolio.name);
         this.descriptionField.setValue(this.portfolio.description);
+        this.updateCoinsData();
       });
+  }
 
-    
+  updateCoinsData(): void {
+    this.coinLogosUrl.splice(0);
+    this.coinSymbols.splice(0);
+    this.totalValue = 0;
+    this.portfolio.positions.forEach(position => {
+      const coinId = position.coinId;
+      const amount = position.amount;
+      this.coinApiService.getCoinById(coinId).subscribe(coinResult => {
+        this.totalValue = this.totalValue + coinResult.market_data.current_price.eur * amount;
+        this.coinSymbols.push(coinResult.symbol.toUpperCase());
+        this.coinLogosUrl.push(coinResult.image.small);
+      })
+    });
   }
 
   updatePortfolio(): void {

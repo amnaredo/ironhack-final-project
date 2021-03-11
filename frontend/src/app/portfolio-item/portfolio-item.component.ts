@@ -17,7 +17,8 @@ export class PortfolioItemComponent implements OnInit {
   @Output() deletePortfolioEvent = new EventEmitter();
 
   totalValue: number = 0;
-  includeSymbols: string[] = [];
+  coinSymbols: string[] = [];
+  coinLogosUrl: string[] = [];
 
   constructor(
     private coinApiService: CoinApiService,
@@ -30,14 +31,16 @@ export class PortfolioItemComponent implements OnInit {
   }
 
   updateCoinsData(): void {
-    this.includeSymbols.splice(0);
+    this.coinSymbols.splice(0);
+    this.coinLogosUrl.splice(0);
     this.totalValue = 0;
     this.portfolio.positions.forEach(position => {
       const coinId = position.coinId;
       const amount = position.amount;
       this.coinApiService.getCoinById(coinId).subscribe(coinResult => {
         this.totalValue = this.totalValue + coinResult.market_data.current_price.eur * amount;
-        this.includeSymbols.push(coinResult.symbol.toUpperCase());
+        this.coinSymbols.push(coinResult.symbol.toUpperCase());
+        this.coinLogosUrl.push(coinResult.image.thumb);
       })
     });
   }

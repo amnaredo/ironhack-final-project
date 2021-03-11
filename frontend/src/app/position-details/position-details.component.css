@@ -3,3 +3,10 @@
     font-size: 12px;
     margin: 0;
   }
+.container {
+    background-color: rgb(230, 230, 230);
+}
+
+img { 
+    float: right;
+}

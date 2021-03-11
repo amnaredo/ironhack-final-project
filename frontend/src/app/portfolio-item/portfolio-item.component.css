@@ -1,3 +1,7 @@
-div {
+/* div {
     border: 1px solid black;
+} */
+
+.container {
+    background-color: rgb(230, 230, 230);
 }

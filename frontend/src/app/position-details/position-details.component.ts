@@ -12,6 +12,8 @@ import { PositionUpdate } from '../models/position-update';
 export class PositionDetailsComponent implements OnInit {
 
   @Input() position!: Position;
+  @Input("coin") coinSymbol!: string;
+  @Input("logo") coinLogoUrl!: string;
 
   @Output() deletePositionEvent = new EventEmitter();
   @Output() updatePositionEvent = new EventEmitter();

@@ -1,31 +1,36 @@
+<div class="container">
+<img src="{{coinLogoUrl}}">
 <ul>
-    <li>Coin: {{position.coinId}}</li>
+    <!-- <li>Coin: {{position.coinId}}</li> -->
+    <li>Coin: {{coinSymbol}}</li>
     <li>Amount: {{position.amount}}</li>
 
-    <li>Update amount of this position: </li>
     <form (ngSubmit)="onUpdatePosition()" [formGroup]="form">
   
-      <label for="amount">New amount: </label><br>
+      <label for="amount">Update amount: </label><br>
       <input formControlName="amount" type="number" step="any" name="amount"><br>
       <p class="error-msg" *ngIf="amountField.invalid && amountField.touched">Amount is required</p>
 
-      <label for="description">Description: </label> <br>
+      <label for="description">Notes: </label> <br>
       <input formControlName="description" type="text" name="amount"><br>
       <p class="error-msg" *ngIf="descriptionField.invalid && descriptionField.touched">Description is required</p>
       <br>
-      <button type="submit" [disabled]="form.invalid">Update position amount</button>
+      <button type="submit" [disabled]="form.invalid">Update position</button>
   
     </form>
 
 
     <!-- <button (click)="toggleShowUpdates()">{{showUpdates ? 'Hide updates' : 'Show updates'}}</button>
     <li *ngIf="showUpdates"> -->
+    <br>
     <li>
         <ul>
             <li *ngFor="let update of position.updates.reverse()">
-                {{update.timestamp}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
+                {{update.timestamp | date:'dd/MM/yyyy hh:mm:ss'}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
             </li>
         </ul>
     </li>
+    <br>
     <button (click)="onDeletePosition()">Delete position</button>
 </ul>
+</div>

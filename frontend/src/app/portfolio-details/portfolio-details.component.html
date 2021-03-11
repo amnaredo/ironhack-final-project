@@ -2,6 +2,7 @@
     <!-- <h2>{{portfolio?.name}}</h2>
     <p>{{portfolio?.description}}</p> -->
     <div class="container">
+        <h3>Total value: {{totalValue.toFixed(2)}} EUR</h3>
         <form (ngSubmit)="updatePortfolio()" [formGroup]="form">
       
           <label for="name">Name:</label><br>
@@ -18,8 +19,8 @@
     </div>
 
     <div class="positions">
-        <div *ngFor="let position of portfolio?.positions">
-            <app-position-details [position]="position" 
+        <div *ngFor="let position of portfolio?.positions; let i = index">
+            <app-position-details [position]="position" [coin]="coinSymbols[i]" [logo]="coinLogosUrl[i]"
              (updatePositionEvent)="updatePosition(position, $event)"
              (deletePositionEvent)="deletePosition($event)"
              (deletePositionUpdateEvent)="deletePositionUpdate(position, $event)"></app-position-details>
