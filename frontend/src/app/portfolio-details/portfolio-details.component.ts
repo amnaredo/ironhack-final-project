@@ -32,9 +32,10 @@ export class PortfolioDetailsComponent implements OnInit {
 
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.portfolioService.getPortfolio(id).subscribe(
-      portfolio => this.portfolio = portfolio,
+      portfolio => {
+        this.portfolio = portfolio
       // error => this.router.navigate(['/portfolios'])
-    )
+      });
   }
 
 
@@ -43,6 +44,7 @@ export class PortfolioDetailsComponent implements OnInit {
       const index = this.portfolio.positions.indexOf(position, 0);
       if (index > -1) {
         this.portfolio.positions.splice(index, 1);
+        this.getById();
       }
     });
   }
@@ -53,6 +55,7 @@ export class PortfolioDetailsComponent implements OnInit {
       if (index > -1) {
         this.portfolio.positions[index].updates.push(dataResult);
         this.portfolio.positions[index].amount = dataResult.amount;
+        this.getById();
       }
     });
   }
@@ -65,6 +68,7 @@ export class PortfolioDetailsComponent implements OnInit {
         if (indexUpdate > -1) {
           this.portfolio.positions[indexPosition].updates.splice(indexUpdate, 0);
           console.log("deleted");
+          this.getById();
         }
       }
     });

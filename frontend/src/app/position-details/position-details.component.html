@@ -18,8 +18,9 @@
     </form>
 
 
-    <button (click)="toggleShowUpdates()">{{showUpdates ? 'Hide updates' : 'Show updates'}}</button>
-    <li *ngIf="showUpdates">
+    <!-- <button (click)="toggleShowUpdates()">{{showUpdates ? 'Hide updates' : 'Show updates'}}</button>
+    <li *ngIf="showUpdates"> -->
+    <li>
         <ul>
             <li *ngFor="let update of position.updates.reverse()">
                 {{update.timestamp}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
