@@ -9,8 +9,6 @@
           <label for="description">Description: </label><br>
           <input formControlName="description" type="text" name="description"><br>
           <p class="error-msg" *ngIf="descriptionField.invalid && descriptionField.touched">Description is required</p>
-    
-          <br>
           <button type="submit" [disabled]="form.invalid">Add portfolio</button>
       
         </form>
