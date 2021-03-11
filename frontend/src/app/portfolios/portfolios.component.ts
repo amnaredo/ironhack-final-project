@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Portfolio } from '../models/portfolio';
 import { PortfolioService } from '../services/portfolio.service';
 
@@ -10,10 +11,24 @@ import { PortfolioService } from '../services/portfolio.service';
 export class PortfoliosComponent implements OnInit {
 
   portfolios: Portfolio[] = [];
+
+  form: FormGroup;
+
+  nameField: FormControl;
+  descriptionField: FormControl;
   
   constructor(
     private portfolioService: PortfolioService 
-  ) { }
+  ) {
+    this.nameField = new FormControl('', [ Validators.required ]);
+    this.descriptionField = new FormControl('', [ Validators.required ]);
+ 
+    // Initialzie Form Group
+    this.form = new FormGroup({
+      name: this.nameField,
+      description: this.descriptionField,
+    });
+   }
 
   ngOnInit(): void {
     this.getPortfolios(1);
@@ -33,4 +48,11 @@ export class PortfoliosComponent implements OnInit {
     
   }
 
+  onAddPortfolio(): void {
+    let newPortfolio = new Portfolio(0, this.nameField.value, this.descriptionField.value, 1, [])
+    this.portfolioService.addPortfolio(1, newPortfolio).subscribe(dataResult => {
+      alert('A portfolio has been added to your profile!');
+      this.getPortfolios(1);
+    });
+  }
 }

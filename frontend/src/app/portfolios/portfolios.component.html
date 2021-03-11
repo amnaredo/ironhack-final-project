@@ -1,4 +1,20 @@
 <div class="container">
+    <div class="container">
+        <form (ngSubmit)="onAddPortfolio()" [formGroup]="form">
+      
+          <label for="name">Name: </label><br>
+          <input formControlName="name" type="text" name="name"><br>
+          <p class="error-msg" *ngIf="nameField.invalid && nameField.touched">Name is required</p>
+    
+          <label for="description">Description: </label><br>
+          <input formControlName="description" type="text" name="description"><br>
+          <p class="error-msg" *ngIf="descriptionField.invalid && descriptionField.touched">Description is required</p>
+    
+          <br>
+          <button type="submit" [disabled]="form.invalid">Add portfolio</button>
+      
+        </form>
+      </div>
     <app-portfolio-item *ngFor="let portfolio of portfolios" [portfolio]="portfolio" (deletePortfolioEvent)="deletePortfolio($event)"></app-portfolio-item>
 </div>
 

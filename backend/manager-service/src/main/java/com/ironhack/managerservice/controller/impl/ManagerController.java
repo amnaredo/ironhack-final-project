@@ -60,6 +60,7 @@ public class ManagerController implements IManagerController {
         return service.getPortfolio(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/users/{idUser}/portfolios")
     @ResponseStatus(HttpStatus.CREATED)
     public PortfolioDTO addPortfolio(@PathVariable Long idUser, @RequestBody PortfolioDTO portfolioDTO) {
