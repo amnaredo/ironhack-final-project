@@ -27,6 +27,7 @@ public class ManagerService implements IManagerService {
 
     private CircuitBreakerFactory circuitBreakerFactory = new Resilience4JCircuitBreakerFactory();
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public PortfolioDTO getPortfolio(Long id) {
         CircuitBreaker cbPortfolioService = circuitBreakerFactory.create("portfolio-service");

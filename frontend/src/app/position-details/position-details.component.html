@@ -6,7 +6,7 @@
     <form (ngSubmit)="onUpdatePosition()" [formGroup]="form">
   
       <label for="amount">New amount: </label><br>
-      <input formControlName="amount" type="number" name="amount"><br>
+      <input formControlName="amount" type="number" step="any" name="amount"><br>
       <p class="error-msg" *ngIf="amountField.invalid && amountField.touched">Amount is required</p>
 
       <label for="description">Description: </label> <br>

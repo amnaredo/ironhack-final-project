@@ -72,9 +72,12 @@ public class ManagerController implements IManagerController {
         service.updatePortfolio(id, portfolioDTO);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping("/portfolios/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePortfolio(@PathVariable Long id) {
+
+        logger.info("HOLAAA");
         service.deletePortfolio(id);
     }
 

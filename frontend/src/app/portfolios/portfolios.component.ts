@@ -26,4 +26,11 @@ export class PortfoliosComponent implements OnInit {
     });
   }
 
+  deletePortfolio(id: number): void {
+    this.portfolioService.deletePortfolio(id).subscribe( dataResult => {
+      this.getPortfolios(1);
+    });
+    
+  }
+
 }

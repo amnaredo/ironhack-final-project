@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
 import { PositionUpdate } from '../models/position-update';
 import { PortfolioService } from '../services/portfolio.service';
@@ -12,8 +13,11 @@ export class PortfolioItemComponent implements OnInit {
 
   @Input() portfolio!: Portfolio;
 
+  @Output() deletePortfolioEvent = new EventEmitter();
+
   constructor(
     private portfolioService: PortfolioService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,16 +31,10 @@ export class PortfolioItemComponent implements OnInit {
   //   this._portfolio = portfolio;
   // }
 
-  deletePosition(idPosition: number): void {
-
-  }
-
-  updatePosition(idPosition: number, update: {amount: number, description:string}): void {
-
-  }
-
-  deletePositionUpdate(idPositionUpdate: number): void {
-
+  
+  onDeletePortfolio(portfolio: Portfolio): void {
+    this.deletePortfolioEvent.emit(portfolio.id);
+    this.router.navigate(['portfolios']);
   }
 
 

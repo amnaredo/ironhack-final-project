@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
 import { Position } from '../models/position';
@@ -13,6 +13,8 @@ import { PortfolioService } from '../services/portfolio.service';
 export class PortfolioDetailsComponent implements OnInit {
 
   portfolio!: Portfolio;
+
+  @Output() deletePortfolioEvent = new EventEmitter();
 
   constructor(
     private portfolioService: PortfolioService,
@@ -72,6 +74,12 @@ export class PortfolioDetailsComponent implements OnInit {
         }
       }
     });
+  }
+
+  
+  onDeletePortfolio(portfolio: Portfolio): void {
+    this.deletePortfolioEvent.emit(portfolio.id);
+    this.router.navigate(['portfolios']);
   }
 
 }

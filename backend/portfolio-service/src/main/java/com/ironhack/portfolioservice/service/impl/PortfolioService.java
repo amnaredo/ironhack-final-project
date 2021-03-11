@@ -83,7 +83,7 @@ public class PortfolioService implements IPortfolioService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         Portfolio portfolio = repository.findById(id).get();
-        List<PositionDTO> positions = getPortfolioPositions(id);
+        List<PositionDTO> positions = getPortfolioPositionsWithUpdates(id);
 
         for(PositionDTO positionDTO: positions) {
             for(PositionUpdateDTO positionUpdateDTO: positionDTO.getUpdates()) {

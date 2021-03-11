@@ -3,4 +3,5 @@
     <li>Description: {{portfolio.description}}</li>
     <li *ngIf="portfolio.positions.length">Includes: <span *ngFor="let position of portfolio.positions.slice(0,3)">{{position.coinId}} </span></li>
     <a [routerLink]="['/portfolios/', portfolio.id]">View/edit portfolio</a>
+    <button (click)="onDeletePortfolio(portfolio)">Delete portfolio</button>
 </ul>

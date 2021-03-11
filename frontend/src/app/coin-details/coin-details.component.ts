@@ -31,7 +31,7 @@ export class CoinDetailsComponent implements OnInit {
     private coinApiService: CoinApiService,
     private portfolioService: PortfolioService,
   ) {
-    this.amountField = new FormControl('', [ Validators.required, Validators.min(0) ]);
+    this.amountField = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999999999999.99999999) ]);
     this.portfolioField = new FormControl('', [ Validators.required ]);
  
     // Initialzie Form Group

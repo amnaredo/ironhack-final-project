@@ -17,7 +17,7 @@ export class PositionDetailsComponent implements OnInit {
   @Output() updatePositionEvent = new EventEmitter();
   @Output() deletePositionUpdateEvent = new EventEmitter();
 
-  showUpdates: boolean = false;
+  // showUpdates: boolean = false;
 
   form: FormGroup;
 
@@ -26,7 +26,7 @@ export class PositionDetailsComponent implements OnInit {
   
   
   constructor() {
-    this.amountField = new FormControl('', [ Validators.required, Validators.min(0) ]);
+    this.amountField = new FormControl('', [ Validators.required, Validators.min(0), Validators.max(999999999999.99999999) ]);
     this.descriptionField = new FormControl('', [ Validators.required ]);
 
     this.form = new FormGroup({
@@ -38,9 +38,9 @@ export class PositionDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleShowUpdates(): void {
-    this.showUpdates = !this.showUpdates;
-  }
+  // toggleShowUpdates(): void {
+  //   this.showUpdates = !this.showUpdates;
+  // }
 
   onUpdatePosition(): void {
     const values = {

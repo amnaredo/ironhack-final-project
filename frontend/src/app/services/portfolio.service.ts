@@ -22,6 +22,10 @@ export class PortfolioService {
     return this.http.get<Portfolio>('http://localhost:8080/portfolios/' + id);
   }
 
+  deletePortfolio(id: number): Observable<{}> {
+    return this.http.delete('http://localhost:8080/portfolios/' + id);
+  }
+
   addPosition(id: number, position: Position): Observable<Position> {
     let body = JSON.stringify(position);
     body = body.replace(/"_/g, '"');

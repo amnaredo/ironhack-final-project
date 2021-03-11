@@ -1,4 +1,4 @@
 <div class="container">
-    <app-portfolio-item *ngFor="let portfolio of portfolios" [portfolio]="portfolio"></app-portfolio-item>
+    <app-portfolio-item *ngFor="let portfolio of portfolios" [portfolio]="portfolio" (deletePortfolioEvent)="deletePortfolio($event)"></app-portfolio-item>
 </div>
 
