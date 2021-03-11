@@ -32,6 +32,16 @@ export class PortfolioService {
     return this.http.post<Portfolio>('http://localhost:8080/users/' + idUser + '/portfolios/', body, httpOptions);
   }
 
+  updatePortfolio(id: number, portfolio: Portfolio): Observable<{}> {
+    let body = JSON.stringify(portfolio);
+    body = body.replace(/"_/g, '"');
+    console.log(body);
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.put('http://localhost:8080/portfolios/' + id, body, httpOptions);
+  }
+
   deletePortfolio(id: number): Observable<{}> {
     return this.http.delete('http://localhost:8080/portfolios/' + id);
   }

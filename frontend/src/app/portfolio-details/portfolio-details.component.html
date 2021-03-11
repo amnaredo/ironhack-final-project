@@ -1,6 +1,22 @@
 <div>
-    <h2>{{portfolio?.name}}</h2>
-    <p>{{portfolio?.description}}</p>
+    <!-- <h2>{{portfolio?.name}}</h2>
+    <p>{{portfolio?.description}}</p> -->
+    <div class="container">
+        <form (ngSubmit)="updatePortfolio()" [formGroup]="form">
+      
+          <label for="name">Name:</label><br>
+          <input formControlName="name" type="text" name="name"><br>
+          <p class="error-msg" *ngIf="nameField.invalid && nameField.touched">Name is required</p>
+    
+          <label for="description">Description:</label><br>
+          <input formControlName="description" type="text" name="description"><br>
+          <p class="error-msg" *ngIf="descriptionField.invalid && descriptionField.touched">Description is required</p>
+          <br>
+          <button type="submit" [disabled]="form.invalid">Update portfolio</button>
+      
+        </form>
+    </div>
+
     <div class="positions">
         <div *ngFor="let position of portfolio?.positions">
             <app-position-details [position]="position" 

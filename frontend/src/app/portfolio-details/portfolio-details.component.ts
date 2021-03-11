@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Portfolio } from '../models/portfolio';
 import { Position } from '../models/position';
@@ -12,15 +13,26 @@ import { PortfolioService } from '../services/portfolio.service';
 })
 export class PortfolioDetailsComponent implements OnInit {
 
-  portfolio!: Portfolio;
+  portfolio: Portfolio = new Portfolio(0, '', '', 1, []);
 
-  @Output() deletePortfolioEvent = new EventEmitter();
+  form: FormGroup;
+
+  nameField: FormControl;
+  descriptionField: FormControl;
 
   constructor(
     private portfolioService: PortfolioService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    this.nameField = new FormControl('', [ Validators.required ]);
+    this.descriptionField = new FormControl('', [Validators.required ]);
+
+    this.form = new FormGroup({
+      name: this.nameField,
+      description: this.descriptionField,
+    });
+  }
 
   ngOnInit(): void {
     this.getById();
@@ -35,8 +47,18 @@ export class PortfolioDetailsComponent implements OnInit {
     const id: number = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.portfolioService.getPortfolio(id).subscribe(
       portfolio => {
-        this.portfolio = portfolio
-      // error => this.router.navigate(['/portfolios'])
+        this.portfolio = portfolio;
+        this.nameField.setValue(this.portfolio.name);
+        this.descriptionField.setValue(this.portfolio.description);
+      });
+
+    
+  }
+
+  updatePortfolio(): void {
+    this.portfolioService.updatePortfolio(this.portfolio.id, 
+      new Portfolio(this.portfolio.id, this.nameField.value, this.descriptionField.value, 1, [])).subscribe(result => {
+        this.getById();
       });
   }
 
@@ -76,10 +98,5 @@ export class PortfolioDetailsComponent implements OnInit {
     });
   }
 
-  
-  onDeletePortfolio(portfolio: Portfolio): void {
-    this.deletePortfolioEvent.emit(portfolio.id);
-    this.router.navigate(['portfolios']);
-  }
 
 }

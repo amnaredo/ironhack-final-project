@@ -50,14 +50,24 @@ export class ProfileComponent implements OnInit {
       this.profile = dataResult;
       if (this.profile.photoUrl.trim().length)
         this.photoUrl = this.profile.photoUrl;
+      
+      this.firstNameField.setValue(this.profile.firstName);
+      this.lastNameField.setValue(this.profile.lastName);
+      this.emailField.setValue(this.profile.email);
+      this.photoUrlField.setValue(this.profile.photoUrl);
     });
   }
 
   onSubmit(): void {
-    this.profileService.updateProfile(this.profile.id, this.profile).subscribe(dataResult => {
+    this.profileService.updateProfile(this.profile.id, 
+      new Profile(
+        this.profile.id,
+         this.firstNameField.value,
+          this.lastNameField.value,
+           this.emailField.value,
+            this.photoUrlField.value)).subscribe(dataResult => {
       this.photoUrl = this.profile.photoUrl;
     });
-    
   }
 
 

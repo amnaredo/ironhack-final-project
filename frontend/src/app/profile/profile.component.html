@@ -11,19 +11,19 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
       <label for="firstname">First name:</label><br>
-      <input formControlName="firstname" type="text" name="firstname" [(ngModel)]="profile.firstName"><br>
+      <input formControlName="firstname" type="text" name="firstname"><br>
       <p class="error-msg" *ngIf="firstNameField.invalid && firstNameField.touched">First name is required</p>
 
       <label for="lastname">Last name:</label><br>
-      <input formControlName="lastname" type="text" name="lastname" [(ngModel)]="profile.lastName"><br>
+      <input formControlName="lastname" type="text" name="lastname"><br>
       <p class="error-msg" *ngIf="lastNameField.invalid && lastNameField.touched">Last name is required</p>
 
       <label for="email">Email:</label><br>
-      <input formControlName="email" type="email" name="email" [(ngModel)]="profile.email"><br>
+      <input formControlName="email" type="email" name="email"><br>
       <p class="error-msg" *ngIf="emailField.invalid && emailField.touched">Email is required</p>
   
       <label for="photourl">Photo URL:</label><br>
-      <input formControlName="photourl" type="text" name="photourl" [(ngModel)]="profile.photoUrl"><br>
+      <input formControlName="photourl" type="text" name="photourl"><br>
 
       <br>
       <button type="submit" [disabled]="form.invalid">Update profile</button>
