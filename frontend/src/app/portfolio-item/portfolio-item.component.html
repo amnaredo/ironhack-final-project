@@ -1,6 +1,7 @@
 <ul>
+    <li>Total value: {{totalValue.toFixed(2)}} EUR</li>
     <li>Name: <a [routerLink]="['/portfolios/', portfolio.id]">{{portfolio.name}}</a></li>
     <li>Description: {{portfolio.description}}</li>
-    <li *ngIf="portfolio.positions.length">Includes: <span *ngFor="let position of portfolio.positions.slice(0,3)">{{position.coinId}} </span></li>
+    <li *ngIf="portfolio.positions.length">Includes: <span *ngFor="let symbol of includeSymbols.slice(0,3)">{{symbol}} </span></li>
     <button (click)="onDeletePortfolio(portfolio)">Delete portfolio</button>
 </ul>
