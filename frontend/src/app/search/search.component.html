@@ -1,6 +1,6 @@
 <ul>
     <li *ngFor="let coinItem of coinItemList; let i = index" [ngClass]="{'even': i%2===0, 'odd': i%2!==0}">
-        <a [routerLink]="['/search/', coinItem.id]">{{coinItem.id}} | {{coinItem.name}} | {{coinItem.symbol}}</a>
+        <a [routerLink]="['/search/', coinItem.id]">[{{coinItem.symbol.toUpperCase()}}] {{coinItem.name}}</a>
     </li>
 </ul>
 
