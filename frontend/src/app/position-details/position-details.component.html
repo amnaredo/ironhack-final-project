@@ -26,7 +26,7 @@
     <li>
         <ul>
             <li *ngFor="let update of position.updates.reverse()">
-                {{update.timestamp | date:'dd/MM/yyyy hh:mm:ss'}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
+                {{update.timestamp | date:'dd/MM/yyyy HH:mm'}} | {{update.description}} | {{update.amount}} <button (click)="onDeletePositionUpdate(update)">Delete</button>
             </li>
         </ul>
     </li>

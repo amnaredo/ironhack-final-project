@@ -1,6 +1,7 @@
 .error-msg {
     color: red;
     font-size: 12px;
+    margin: 0;
   }
 
   .container {

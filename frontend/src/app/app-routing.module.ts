@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'portfolios', component: PortfoliosComponent},
   {path: 'portfolios/:id', component: PortfolioDetailsComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: '', redirectTo: '/search', pathMatch: 'full'},
+  {path: '', redirectTo: '/profile', pathMatch: 'full'},
 ];
 
 @NgModule({

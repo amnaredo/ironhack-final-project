@@ -20,12 +20,20 @@
   <p>Add {{coin?.symbol?.toUpperCase()}} position</p>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
+      <!-- <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input type="number" step="any" matInput [formControl]="amountField" placeholder="Ex. 1.0">
+        <mat-error *ngIf="amountField.invalid">
+          Please enter a valid amount
+        </mat-error>
+      </mat-form-field>
+      <br><br> -->
       <label for="amount">Amount: </label><br>
       <input formControlName="amount" type="number" step="any" name="amount"><br>
       <p class="error-msg" *ngIf="amountField.invalid && amountField.touched">Amount is required</p>
 
       <label for="portfolio">Portfolio: </label> <br>
-      <select formControlName="portfolio" name="portfolio" [(ngModel)]="selectedPortfolio">
+      <select formControlName="portfolio" name="portfolio">
           <option *ngFor="let portfolio of portfolios" [ngValue]="portfolio">{{portfolio.name}}</option>
       </select>
       <p class="error-msg" *ngIf="portfolioField.invalid && portfolioField.touched">Portfolio is required</p>

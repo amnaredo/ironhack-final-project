@@ -49,7 +49,7 @@ export class CoinDetailsComponent implements OnInit {
 
   getById(): void {
 
-    const coinId: string = this.activatedRoute.snapshot.paramMap.get('coinId') || '';
+    const coinId: string = this.activatedRoute.snapshot.paramMap.get('coinId') || 'bitcoin';
     this.coinApiService.getCoinById(coinId).subscribe(dataResult => {
       let newCoin: Coin = new Coin(
         dataResult.id,
