@@ -1,8 +1,10 @@
 # Full Stack Web Application with Microservices
 ### Cryptocurrency Portfolio Manager
 
-This project features a simple application to manage cyrptocurrency portfolios with different positions. 
+This project features a simple application to manage cyrptocurrency portfolios with different positions.
+
 The backend is based in Java, using the Spring Boot lightweight infrastructure with Spring JPA + Hibernate using MySQL database. The structure of the backend side follows a microservices architecture, meaning that the services offered by the application have been developed and implemented independently of each other, including its databases.
+
 The frontend is based in Typescript with Angular as the development framework.
 It also takes advantage of an external REST API provided by [CoinGecko](https://www.coingecko.com/es/api), used to fetch all the live information about cryptocurrency markets.
 
