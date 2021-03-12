@@ -77,7 +77,7 @@ The application itself is made up of five different services:
 /updates/{id}
 ``` 
  - `DELETE` Delete position update
- ```
+
 
 
 ### Frontend Overview
