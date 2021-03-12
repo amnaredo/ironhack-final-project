@@ -12,7 +12,7 @@ The application developed here let end users to register new portfolios on their
 of the portfolio with the current market price of these currencies, and keeps records about the updates made by the user on these positions.
 
 
-### Backend
+### Backend Overview
 
 The backend present a microservices architecture, by using Spring Cloud. It features:
 
@@ -29,85 +29,57 @@ The application itself is made up of five different services:
 - Position Service: stores and provides data about the different positions of the portfolios
 - Position Update Service: stores and provides information regarding the different position updates in users' portfolios.
 
-![Microservices architecture](microservices.png)
+![Microservices architecture](microservices.png "Microservices Architecture")
 
  
-#### API Endpoints
+#### API Endpoints (edge service)
 ```
-/bank/users
+/users
 ```
- - `GET` Read list of all users
-``` 
-/bank/users/admins
-```
- - `GET` Read list of all admins
-
- - `POST` Create new admin user 
-```
-/bank/users/owners
-```
- - `GET` Read list of all owners
- ```
-/bank/users/owners/ah
-``` 
- - `POST` Create new account holder
-```
-/bank/users/owners/tpu
-``` 
- - `POST` Create new third party user
- ```
-/bank/users/owners/{id}
-``` 
- - `GET` Read owner
- ```
-/bank/users/owners/{id}/accounts
-``` 
- - `GET` Read accounts of an owner
- ```
-/bank/accounts
-``` 
- - `GET` Read list of all accounts
- ```
-/bank/accounts/{id}
- ``` 
- - `PATCH` Update balance of the account
- ```
-/bank/accounts/checking/{id}
- ``` 
- - `POST` Create new checking account with owner
- ```
-/bank/accounts/checking/{id}/{id}
- ``` 
- - `POST` Create new checking account with two owners
- ```
-/bank/accounts/savings/{id}
- ``` 
- - `POST` Create new savings account with owner
- ```
- /bank/accounts/savings/{id}/{id}
- ```
- - `POST` Create new savings account with two owners
- ```
- /bank/accounts/creditcard/{id}
- ```
- - `POST` Create new credit card account with owner
- ```
- /bank/accounts/creditcard/{id}/{id}
- ```
- - `POST` Create new credit card account with two owners
- ```
- /bank/transactions
- ```
- - `GET`  Read list of all transactions
+ - `GET` Read all user profiles
  
-#### Auth owner
- ``` 
- /accounts/{id}
- ``` 
- - `GET`  Read account
+ - `POST` Create user profile 
+``` 
+/users/{id}
+```
+ - `GET` Read user profile
 
- - `POST` Create money transfer from account
+ - `PUT` Update user profile
+
+ - `DELETE` Delete user profile  
+```
+/portfolios/{id}
+```
+ - `GET` Read portfolio
+
+ - `PUT` Update portfolio
+
+ - `DELETE` Delete portfolio  
  ```
- /accounts/{id}/transactions
+/users/{idUser}/portfolios
+``` 
+ - `GET` Read all user portfolios
+ 
+ - `POST` Create portfolio
+```
+/portfolios/{id}/positions
+``` 
+ - `POST` Add position to portfolio
  ```
- - `GET`  Read list of all transactions of account
+/positions/{id}
+``` 
+ - `DELETE` Delete position
+ ```
+/positions/{idPosition}/updates
+``` 
+ - `POST` Add position update
+ ```
+/updates/{id}
+``` 
+ - `DELETE` Delete position update
+ ```
+
+
+### Frontend Overview
+
+
