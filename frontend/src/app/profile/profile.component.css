@@ -6,4 +6,9 @@
   img {
     border-radius: 50%;
     border: 5px solid #80b5ea;
+    margin: 20px;
+  }
+
+  .container {
+    padding: 20px;
   }

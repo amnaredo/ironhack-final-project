@@ -12,6 +12,9 @@ import { PortfolioDetailsComponent } from './portfolio-details/portfolio-details
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoinDetailsComponent } from './coin-details/coin-details.component';
 import { PositionDetailsComponent } from './position-details/position-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { PositionDetailsComponent } from './position-details/position-details.co
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,9 @@
 <div class="container">
+    <h3><a [routerLink]="['/portfolios/', portfolio.id]">{{portfolio.name}}</a> ({{totalValue.toFixed(2)}} EUR)</h3>
 <ul>
-    <li>Total value: {{totalValue.toFixed(2)}} EUR</li>
-    <li>Name: <a [routerLink]="['/portfolios/', portfolio.id]">{{portfolio.name}}</a></li>
-    <li>Description: {{portfolio.description}}</li>
+    <!-- <li>Total value: {{totalValue.toFixed(2)}} EUR</li> -->
+    <!-- <li>Name: <a [routerLink]="['/portfolios/', portfolio.id]">{{portfolio.name}}</a></li> -->
+    <li>{{portfolio.description}}</li>
     <li *ngIf="portfolio.positions.length">Includes: <span *ngFor="let coin of coinSymbols.slice(0,3)">{{coin}} </span></li>
     <li *ngIf="coinLogosUrl.length"><img *ngFor="let logoUrl of coinLogosUrl.slice(0,3)" src={{logoUrl}}></li>
 

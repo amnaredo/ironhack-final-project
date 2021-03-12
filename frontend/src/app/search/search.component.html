@@ -1,8 +1,14 @@
-<ul>
-    <li *ngFor="let coinItem of coinItemList; let i = index" [ngClass]="{'even': i%2===0, 'odd': i%2!==0}">
-        <a [routerLink]="['/search/', coinItem.id]">[{{coinItem.symbol.toUpperCase()}}] {{coinItem.name}}</a>
-    </li>
-</ul>
+<div class="container">
+
+        <h2>Coin search</h2>
+        <ul>
+            <li *ngFor="let coinItem of coinItemList; let i = index" [ngClass]="{'even': i%2===0, 'odd': i%2!==0}">
+                <a [routerLink]="['/search/', coinItem.id]">[{{coinItem.symbol.toUpperCase()}}] {{coinItem.name}}</a>
+            </li>
+        </ul>
+
+</div>
+
 
 <!-- <select [(ngModel)]="selectedCoinItem" (change)="onChangeCoin(selectedCoinItem)">
     <option *ngFor="let coinItem of coinItemList" [ngValue]="coinItem"><b>[{{coinItem.symbol}}]</b> {{coinItem.name}}</option>

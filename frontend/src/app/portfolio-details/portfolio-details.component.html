@@ -1,8 +1,9 @@
-<div>
+<div class="container">
     <!-- <h2>{{portfolio?.name}}</h2>
     <p>{{portfolio?.description}}</p> -->
+    <h2>Portfolio details</h2>
     <div class="container">
-        <h3>Total value: {{totalValue.toFixed(2)}} EUR</h3>
+        <h3>{{portfolio.name}} ({{totalValue.toFixed(2)}} EUR)</h3>
         <form (ngSubmit)="updatePortfolio()" [formGroup]="form">
       
           <label for="name">Name:</label><br>

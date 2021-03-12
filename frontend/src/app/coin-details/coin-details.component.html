@@ -1,18 +1,23 @@
+<div class="container">
+  <img src="{{coin?.imageSmall}}">
+  <h2>{{coin?.name}} ({{coin?.symbol?.toUpperCase()}})</h2>
 <ul>
-    <li>ID: {{coin?.id}}</li>
-    <li>SYMBOL: {{coin?.symbol}}</li>
-    <li>NAME: {{coin?.name}}</li>
-    <li>DESCRIPTION: {{coin?.description}}</li>
-    <li>HOMEPAGE: {{coin?.homepage}}</li>
-    <li>IMAGE: {{coin?.imageLarge}}</li>
-    <li>CONTRACT ADDRESS: {{coin?.contractAddress}}</li>
-    <li>CURRENT PRICE BTC: {{coin?.currentPriceBTC}}</li>
-    <li>CURRENT PRICE EUR: {{coin?.currentPriceEUR}}</li>
-    <li>CURRENT PRICE USD: {{coin?.currentPriceUSD}}</li>
+    <!-- <li>ID: {{coin?.id}}</li> -->
+    <li>Symbol: {{coin?.symbol?.toUpperCase()}}</li>
+    <li>Name: {{coin?.name}}</li>
+    <li>Description: {{coin?.description}}</li>
+    <li>Homepage: <a target="_blank" href="{{coin?.homepage}}">{{coin?.homepage}}<mat-icon>open_in_new</mat-icon></a></li>
+    <!-- <li>IMAGE: {{coin?.imageLarge}}</li> -->
+    <!-- <li>CONTRACT ADDRESS: {{coin?.contractAddress}}</li> -->
+    <li>Price (BTC): {{coin?.currentPriceBTC}} BTC</li>
+    <li>Price (EUR): {{coin?.currentPriceEUR}} EUR</li>
+    <li>Price (USD): {{coin?.currentPriceUSD}} USD</li>
 
 </ul>
+</div>
 
 <div class="container">
+  <p>Add {{coin?.symbol?.toUpperCase()}} position</p>
     <form (ngSubmit)="onSubmit()" [formGroup]="form">
   
       <label for="amount">Amount: </label><br>
@@ -24,9 +29,6 @@
           <option *ngFor="let portfolio of portfolios" [ngValue]="portfolio">{{portfolio.name}}</option>
       </select>
       <p class="error-msg" *ngIf="portfolioField.invalid && portfolioField.touched">Portfolio is required</p>
-      <br><br>
-
-
       <br>
       <button type="submit" [disabled]="form.invalid">Add position</button>
   

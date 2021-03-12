@@ -2,7 +2,7 @@
 <img src="{{coinLogoUrl}}">
 <ul>
     <!-- <li>Coin: {{position.coinId}}</li> -->
-    <li>Coin: {{coinSymbol}}</li>
+    <li>Coin:  <a [routerLink]="['/search/' + position.coinId]">{{coinSymbol}}</a></li>
     <li>Amount: {{position.amount}}</li>
 
     <form (ngSubmit)="onUpdatePosition()" [formGroup]="form">
