@@ -18,7 +18,7 @@ The backend present a microservices architecture, by using Spring Cloud. It feat
 
 - Service registration and discovery with Spring Cloud Netflix Eureka
 - Distributed/versioned configuration with Spring Cloud Config
-- Routing with Spring Cloud OpenFeign
+- Declarative REST client with Spring Cloud OpenFeign
 - Circuit breakers with Resilience4J
 
 The application itself is made up of five different services:
