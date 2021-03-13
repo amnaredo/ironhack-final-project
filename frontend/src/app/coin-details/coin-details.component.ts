@@ -17,7 +17,6 @@ export class CoinDetailsComponent implements OnInit {
   coin!: Coin;
 
   portfolios!: Portfolio[];
-  selectedPortfolio! : Portfolio;
 
   form: FormGroup;
 
@@ -78,7 +77,7 @@ export class CoinDetailsComponent implements OnInit {
 
   onSubmit(): void {
     let newPosition = new Position(0, this.coin.id, this.amountField.value, [])
-    this.portfolioService.addPosition(this.selectedPortfolio.id, newPosition).subscribe(dataResult => {
+    this.portfolioService.addPosition(this.portfolioField.value.id, newPosition).subscribe(dataResult => {
       alert('A position has been added to your portfolio!');
     });
   }
