@@ -4,6 +4,6 @@
     margin: 0;
   }
 
-.container {
+.container, .positions {
   padding: 20px;
 }

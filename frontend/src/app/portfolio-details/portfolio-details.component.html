@@ -19,7 +19,9 @@
         </form>
     </div>
 
+    
     <div class="positions">
+        <h3>Positions</h3>
         <div *ngFor="let position of portfolio?.positions; let i = index">
             <app-position-details [position]="position" [coin]="coinSymbols[i]" [logo]="coinLogosUrl[i]"
              (updatePositionEvent)="updatePosition(position, $event)"

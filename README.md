@@ -29,6 +29,8 @@ The application itself is made up of five different services:
 - Position Service: stores and provides data about the different positions of the portfolios
 - Position Update Service: stores and provides information regarding the different position updates in users' portfolios.
 
+#### Microservices Architecture
+
 ![Microservices architecture](microservices.png "Microservices Architecture")
 
  
