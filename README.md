@@ -85,3 +85,14 @@ The application itself is made up of five different services:
 ### Frontend Overview
 
 
+The frontend is an Angular application, it just makes HTTP requests to the edge service.
+
+It also performas requests to an external API to get additional live info about cryptcourrencies and markets (see [CoinGecko API](https://www.coingecko.com/es/api)).
+
+It is divided in three major sections:
+- Profile: this section shows user profile information, data can be updated from this section.
+
+- Portfolios: this section shows the collection of portfolios owned by the user. This is the  main section of the application. You can add new portfolios, delete old portfolios and see or edit each
+ portfolio's positions.
+ 
+- Search: this section shows a full list of coins that the external API provides, so you can choose any coin to get info details, and add a position to an existing portfolio from there. 
