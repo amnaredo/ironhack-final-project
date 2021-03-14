@@ -5,7 +5,7 @@
 
 1. Create all required databases with their respective names (see [databases.sql](databases.sql)).
 
-2. Run each of the services as a regular Maven Spring Boot project: `mvn spring-boot:run`.
+2. Run each of the services as a regular Maven Spring Boot project: `mvn spring-boot:run`. The eureka server and the configuration server must be started before the other services.
 
 3. Configuration of these services is outsourced in another repository, so there's no need to do manual configuration. (see [https://github.com/amnaredo/ironhack-final-project-config](https://github.com/amnaredo/ironhack-final-project-config)).
 
