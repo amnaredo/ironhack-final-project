@@ -1,5 +1,5 @@
 # Full Stack Web Application with Microservices
-### Cryptocurrency Portfolio Manager
+## Cryptocurrency Portfolio Manager
 
 This project features a simple application to manage cyrptocurrency portfolios with different positions.
 
